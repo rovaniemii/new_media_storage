@@ -21,4 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "media.storage"
 include(":app")
- 
+include(":core:data")
+include(":core:model")
+include(":core:network")
+include(":core:ui")
+include(":feature:main")
