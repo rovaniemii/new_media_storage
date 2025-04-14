@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface KakaoAPIService {
     @GET(KakaoConstant.KAKAO_IMAGE_URL)
     suspend fun searchImages(
-        @Query("sort") sort: String,
+        @Query("sort") sort: String = KakaoConstant.KAKAO_SORT_RECENCY,
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
@@ -19,7 +19,7 @@ interface KakaoAPIService {
 
     @GET(KakaoConstant.KAKAO_VIDEO_URL)
     suspend fun searchVideos(
-        @Query("sort") sort: String,
+        @Query("sort") sort: String = KakaoConstant.KAKAO_SORT_RECENCY,
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("size") size: Int,

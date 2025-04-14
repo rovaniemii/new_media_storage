@@ -51,4 +51,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+
+    // Paging3
+    implementation(libs.bundles.androidx.pageing3)
 }

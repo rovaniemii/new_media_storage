@@ -25,6 +25,9 @@ hilt-version = "2.55"
 hiltCompiler = "1.2.0"
 hiltLifecycleViewModel = "1.0.0-alpha03"
 
+# Androidx-Paging3
+androidx-paging3 = "3.3.6"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -60,6 +63,10 @@ androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fr
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-version" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-version" }
 
+# Androidx-Paging3
+androidx-paing3 = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidx-paging3" }
+androidx-paing3-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging3" }
+
 [bundles]
 retrofit = [
     "retrofit",
@@ -67,16 +74,18 @@ retrofit = [
     "okhttp3",
     "okhttp3-logging",
 ]
-
 moshi = [
     "moshi",
     "moshi-kotlin",
     "moshi-converter",
 ]
-
 lifecycle-hilt = [
     "androidx-hilt-lifecycle-viewmodel",
     "androidx-hilt-navigation-fragment",
+]
+androidx-pageing3 = [
+    "androidx-paing3",
+    "androidx-paing3-compose"
 ]
 
 [plugins]
