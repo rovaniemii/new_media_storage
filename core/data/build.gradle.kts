@@ -54,4 +54,7 @@ dependencies {
 
     // Paging3
     implementation(libs.bundles.androidx.pageing3)
+
+    // Room
+    implementation(libs.bundles.androidx.room)
 }

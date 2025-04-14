@@ -22,6 +22,7 @@ class SearchPagingSource(
                     size = pageSize,
                 ).documents.map {
                     SearchItem(
+                        id = it.thumbnailUrl.hashCode().toLong(),
                         thumbnail = it.thumbnailUrl,
                         dateTime = it.dateTime,
                     )
@@ -33,12 +34,13 @@ class SearchPagingSource(
                     size = pageSize,
                 ).documents.map {
                     SearchItem(
+                        id = it.thumbnail.hashCode().toLong(),
                         thumbnail = it.thumbnail,
                         dateTime = it.dateTime,
                     )
                 }
 
-            val responseResult = (imageResponse + videoResponse).sortedByDescendingTime()
+            val responseResult = (imageResponse + videoResponse).sortedByDescendingDateTime()
             LoadResult.Page(
                 data = responseResult,
                 prevKey = if (page == 1) null else page - 1,
@@ -56,7 +58,7 @@ class SearchPagingSource(
         }
     }
 
-    private fun List<SearchItem>.sortedByDescendingTime(): List<SearchItem> {
+    private fun List<SearchItem>.sortedByDescendingDateTime(): List<SearchItem> {
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
         return sortedByDescending {
             try {

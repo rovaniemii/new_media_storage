@@ -1,7 +1,9 @@
 package com.rovaniemi.model.domain
 
-data class SearchItem(
+class StorageItem(
     val id: Long,
     val thumbnail: String,
     val dateTime: String,
+    val isBookmark: Boolean,
+    var createdAt: Long,
 )

@@ -39,4 +39,7 @@ dependencies {
 
     // Moshi
     implementation(libs.bundles.moshi)
+
+    // Room
+    implementation(libs.bundles.androidx.room)
 }

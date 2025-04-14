@@ -28,6 +28,9 @@ hiltLifecycleViewModel = "1.0.0-alpha03"
 # Androidx-Paging3
 androidx-paging3 = "3.3.6"
 
+# Androidx-Room
+androidx-room = "2.7.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -67,6 +70,13 @@ hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 androidx-paing3 = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidx-paging3" }
 androidx-paing3-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging3" }
 
+# Androidx-Room
+room-gradle-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
+androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "androidx-room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+
 [bundles]
 retrofit = [
     "retrofit",
@@ -86,6 +96,13 @@ lifecycle-hilt = [
 androidx-pageing3 = [
     "androidx-paing3",
     "androidx-paing3-compose"
+]
+androidx-room = [
+    "androidx-room-runtime",
+    "androidx-room-ktx",
+    "androidx-room-rxjava3",
+    "androidx-room-compiler",
+    "room-gradle-plugin",
 ]
 
 [plugins]
