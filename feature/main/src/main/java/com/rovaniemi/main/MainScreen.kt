@@ -20,10 +20,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.rovaniemi.main.model.ScreenType
+import com.rovaniemi.main.common.viewdata.ScreenType
 import com.rovaniemi.main.search.SearchScreen
 import com.rovaniemi.main.storage.StorageScreen
-import com.rovaniemi.main.view.BottomNavigationBar
+import com.rovaniemi.main.common.view.BottomNavigationBar
 import com.rovaniemi.main.viewmodel.MainViewModel
 
 @Composable
@@ -70,7 +70,9 @@ internal fun MainScreen(
                 route = ScreenType.BOOKMARKS,
             ) {
                 StorageScreen(
+                    navigationHeight = navigationHeight,
                     items = storageData,
+                    deleteItem = viewModel::deleteBookmark,
                 )
             }
         }

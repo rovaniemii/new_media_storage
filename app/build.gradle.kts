@@ -62,7 +62,6 @@ dependencies {
 
     // Compose
      implementation(platform(libs.compose.bom))
-    // implementation(libs.bundles.compose)
 
     // Hilt
     implementation(libs.hilt.android)

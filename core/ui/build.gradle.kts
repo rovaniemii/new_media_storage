@@ -48,7 +48,6 @@ dependencies {
 
     // Compose
     implementation(platform(libs.compose.bom))
-    // implementation(libs.bundles.compose)
 
     // Coil
     implementation(libs.bundles.coil)

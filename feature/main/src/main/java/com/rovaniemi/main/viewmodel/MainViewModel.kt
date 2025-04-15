@@ -7,11 +7,18 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.rovaniemi.data.repository.RoomRepository
 import com.rovaniemi.data.repository.SearchRepository
-import com.rovaniemi.main.model.SearchViewData
+import com.rovaniemi.main.common.viewdata.SearchViewData
 import com.rovaniemi.model.domain.SearchItem
 import com.rovaniemi.model.domain.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,14 +27,15 @@ class MainViewModel @Inject constructor(
     private val searchRepository: SearchRepository,
     private val roomRepository: RoomRepository,
 ) : ViewModel() {
-    private val _searchPagingData = MutableStateFlow<PagingData<SearchItem>>(PagingData.empty())
-    private val _storageItems = MutableStateFlow<List<StorageItem>>(emptyList())
-    private val _cachedQuery = MutableStateFlow("")
-    val cachedQuery =_cachedQuery.asStateFlow()
-    private val _bookmarkEventFlow = MutableSharedFlow<BookmarkEvent>()
-
     private val _isSearchInitialized = MutableStateFlow(false)
     val isSearchInitialized = _isSearchInitialized.asStateFlow()
+
+    private val _searchPagingData = MutableStateFlow<PagingData<SearchItem>>(PagingData.empty())
+    private val _storageItems = MutableStateFlow<List<StorageItem>>(emptyList())
+
+    private val _cachedQuery = MutableStateFlow("")
+    val cachedQuery = _cachedQuery.asStateFlow()
+    private val _bookmarkEventFlow = MutableSharedFlow<BookmarkEvent>()
 
     sealed class BookmarkEvent {
         data object InsertSuccess : BookmarkEvent()
@@ -48,7 +56,20 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    val storageItems = _storageItems.asStateFlow()
+    internal val storageItems = _storageItems.map {
+        it.map { item ->
+            SearchViewData(
+                id = item.id,
+                thumbnail = item.thumbnail,
+                dateTime = item.dateTime,
+                isBookmark = true,
+            )
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Lazily,
+        initialValue = emptyList(),
+    )
 
     init {
         _isSearchInitialized.value = true
@@ -79,6 +100,17 @@ class MainViewModel @Inject constructor(
                         )
                     )
                 }
+                _bookmarkEventFlow.emit(BookmarkEvent.InsertSuccess)
+            } catch (e: Exception) {
+                _bookmarkEventFlow.emit(BookmarkEvent.InsertFail)
+            }
+        }
+    }
+
+    fun deleteBookmark(id: Long) {
+        viewModelScope.launch {
+            try {
+                roomRepository.deleteBookmark(id)
                 _bookmarkEventFlow.emit(BookmarkEvent.InsertSuccess)
             } catch (e: Exception) {
                 _bookmarkEventFlow.emit(BookmarkEvent.InsertFail)

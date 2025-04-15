@@ -1,4 +1,4 @@
-package com.rovaniemi.main.search
+package com.rovaniemi.main.common.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,16 +23,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rovaniemi.main.R
-import com.rovaniemi.main.model.SearchViewData
+import com.rovaniemi.main.common.viewdata.SearchViewData
 import com.rovaniemi.ui.designsystem.image.CoilImageView
 import com.rovaniemi.ui.extension.rippleClickable
 
-// todo storage와 search 같이 쓸 수 있도록 변경하기
 @Composable
 internal fun SearchItemView(
     modifier: Modifier = Modifier,
     viewData: SearchViewData,
-    onClickUpdateBookmark: (item: SearchViewData) -> Unit,
+    onClickUpdateBookmark: ((item: SearchViewData) -> Unit)? = null,
 ) {
     val bookmarkIcon by remember(viewData.isBookmark) {
         mutableIntStateOf(
@@ -51,9 +50,15 @@ internal fun SearchItemView(
                 color = Color.White,
                 shape = RoundedCornerShape(8.dp),
             )
-            .rippleClickable(
-                shape = RoundedCornerShape(8.dp),
-                onClick = { onClickUpdateBookmark(viewData) },
+            .then(
+                if (onClickUpdateBookmark != null) {
+                    Modifier.rippleClickable(
+                        shape = RoundedCornerShape(8.dp),
+                        onClick = { onClickUpdateBookmark(viewData) },
+                    )
+                } else {
+                    Modifier
+                }
             )
             .padding(
                 all = 8.dp,
@@ -70,16 +75,18 @@ internal fun SearchItemView(
                 imageUrl = viewData.thumbnail,
             )
 
-            Icon(
-                modifier = Modifier
-                    .padding(
-                        all = 8.dp,
-                    )
-                    .align(Alignment.TopEnd),
-                painter = painterResource(id = bookmarkIcon),
-                tint = if (viewData.isBookmark) Color.Black else Color.LightGray,
-                contentDescription = null,
-            )
+            onClickUpdateBookmark?.let {
+                Icon(
+                    modifier = Modifier
+                        .padding(
+                            all = 8.dp,
+                        )
+                        .align(Alignment.TopEnd),
+                    painter = painterResource(id = bookmarkIcon),
+                    tint = if (viewData.isBookmark) Color.Black else Color.LightGray,
+                    contentDescription = null,
+                )
+            }
         }
 
         Text(

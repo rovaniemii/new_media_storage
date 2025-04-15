@@ -57,7 +57,6 @@ dependencies {
 
     // Compose
     implementation(platform(libs.compose.bom))
-    implementation(libs.bundles.compose)
 
     // Hilt
     implementation(libs.hilt.android)
@@ -65,4 +64,7 @@ dependencies {
 
     // Paging3
     implementation(libs.bundles.androidx.paging3)
+
+    // Util
+    implementation(libs.bundles.util)
 }

@@ -1,4 +1,4 @@
-package com.rovaniemi.main.model
+package com.rovaniemi.main.common.viewdata
 
 internal object ScreenType {
     const val SEARCH = "Search"

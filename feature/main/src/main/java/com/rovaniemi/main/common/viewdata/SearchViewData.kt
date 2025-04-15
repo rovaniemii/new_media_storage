@@ -1,4 +1,4 @@
-package com.rovaniemi.main.model
+package com.rovaniemi.main.common.viewdata
 
 internal data class SearchViewData(
     val id: Long,

@@ -1,14 +1,10 @@
 package com.rovaniemi.main.search
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,8 +16,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.rovaniemi.main.model.SearchViewData
-import com.rovaniemi.ui.util.DisableOverScroll
+import com.rovaniemi.main.common.view.ItemsGridView
+import com.rovaniemi.main.common.viewdata.SearchViewData
 
 @Composable
 internal fun SearchScreen(
@@ -59,33 +55,11 @@ internal fun SearchScreen(
 
         when (val loadState = items.loadState.refresh) {
             is LoadState.NotLoading -> {
-                DisableOverScroll {
-                    LazyVerticalGrid(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                horizontal = 4.dp,
-                            ),
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(
-                            bottom = navigationHeight,
-                        ),
-                    ) {
-                        items(
-                            count = items.itemCount,
-                            key = { index ->
-                                items[index].hashCode()
-                            },
-                        ) { index ->
-                            items[index]?.let { item ->
-                                SearchItemView(
-                                    viewData = item,
-                                    onClickUpdateBookmark = onClickUpdateBookmark,
-                                )
-                            }
-                        }
-                    }
-                }
+                ItemsGridView(
+                    navigationHeight = navigationHeight,
+                    items = items.itemSnapshotList.items,
+                    onClickItem = onClickUpdateBookmark,
+                )
             }
 
             is LoadState.Loading -> {

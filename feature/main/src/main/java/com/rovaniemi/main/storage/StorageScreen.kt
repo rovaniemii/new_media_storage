@@ -1,62 +1,55 @@
 package com.rovaniemi.main.storage
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.rovaniemi.model.domain.StorageItem
-import com.rovaniemi.ui.util.DisableOverScroll
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.rovaniemi.main.common.view.ItemsGridView
+import com.rovaniemi.main.common.viewdata.SearchViewData
 
 @Composable
 internal fun StorageScreen(
     modifier: Modifier = Modifier,
-    items: List<StorageItem>, // todo ViewData 생성
+    navigationHeight: Dp,
+    items: List<SearchViewData>,
+    deleteItem: (itemId: Long) -> Unit,
 ) {
-    DisableOverScroll {
-        LazyColumn(
-            modifier = modifier
-                .fillMaxWidth()
-        ) {
-            items(
-                count = items.size,
-                key = { index ->
-                    items[index].hashCode()
-                },
-            ) { index ->
-                val item = items[index]
-
-                StorageItemView(
-                    viewData = item,
-                )
-            }
+    ItemsGridView(
+        modifier = modifier,
+        navigationHeight = navigationHeight,
+        items = items,
+        onClickItem = {
+            deleteItem(it.id)
         }
-    }
+    )
 }
 
 @Preview
 @Composable
-private fun PreviewStorageScreen(){
+private fun PreviewStorageScreen() {
     StorageScreen(
+        navigationHeight = 0.dp,
         items = listOf(
-            StorageItem(
+            SearchViewData(
                 id = 0L,
                 thumbnail = "",
                 dateTime = "2025년 4월 8일",
                 isBookmark = true,
             ),
-            StorageItem(
+            SearchViewData(
                 id = 0L,
                 thumbnail = "",
                 dateTime = "2025년 4월 8일",
                 isBookmark = true,
             ),
-            StorageItem(
+            SearchViewData(
                 id = 0L,
                 thumbnail = "",
                 dateTime = "2025년 4월 8일",
                 isBookmark = true,
             ),
-        )
+        ),
+        deleteItem = {},
     )
 }
