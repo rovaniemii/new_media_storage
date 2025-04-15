@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,26 +21,63 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.rovaniemi.main.common.view.BottomNavigationBar
 import com.rovaniemi.main.common.viewdata.ScreenType
 import com.rovaniemi.main.search.SearchScreen
 import com.rovaniemi.main.storage.StorageScreen
-import com.rovaniemi.main.common.view.BottomNavigationBar
-import com.rovaniemi.main.viewmodel.MainViewModel
+import com.rovaniemi.main.viewmodel.SearchViewModel
+import com.rovaniemi.main.viewmodel.StorageViewModel
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
 
+@OptIn(FlowPreview::class)
 @Composable
 internal fun MainScreen(
     modifier: Modifier = Modifier,
-    viewModel: MainViewModel = viewModel(),
+    searchViewModel: SearchViewModel = viewModel(),
+    storageViewModel: StorageViewModel = viewModel(),
+    handleToastMessage: (message: String) -> Unit,
 ) {
     val density = LocalDensity.current
     val navController = rememberNavController()
 
-    val searchPagingData = viewModel.searchPagingData.collectAsLazyPagingItems()
-    val storageData by viewModel.storageItems.collectAsState()
-    val isSearchInitialized by viewModel.isSearchInitialized.collectAsState()
-    val cachedQuery by viewModel.cachedQuery.collectAsState()
+    val searchPagingData = searchViewModel.searchPagingData.collectAsLazyPagingItems()
+    val storagePagingData = storageViewModel.storagePagingData.collectAsLazyPagingItems()
+    val isSearchInitialized by searchViewModel.isSearchInitialized.collectAsState()
+    val cachedQuery by searchViewModel.cachedQuery.collectAsState()
 
     var navigationHeight by remember { mutableStateOf(0.dp) }
+
+    LaunchedEffect(Unit) {
+        launch {
+            searchViewModel.bookmarkEventFlow.collect { event ->
+                when (event) {
+                    is SearchViewModel.BookmarkEvent.Success -> {
+                        searchViewModel.refreshStorage()
+                        storagePagingData.refresh()
+                    }
+
+                    is SearchViewModel.BookmarkEvent.Fail -> {
+                        handleToastMessage(event.message)
+                    }
+                }
+            }
+        }
+
+        launch {
+            storageViewModel.bookmarkEventFlow.collect { event ->
+                when (event) {
+                    is StorageViewModel.BookmarkEvent.DeleteSuccess -> {
+                        storagePagingData.refresh()
+                    }
+
+                    is StorageViewModel.BookmarkEvent.DeleteFail -> {
+                        handleToastMessage(event.message)
+                    }
+                }
+            }
+        }
+    }
 
     Box(
         modifier = modifier
@@ -61,8 +99,8 @@ internal fun MainScreen(
                     isSearchInitialized = isSearchInitialized,
                     query = cachedQuery,
                     items = searchPagingData,
-                    onSearchButtonClick = viewModel::updateSearchQuery,
-                    onClickUpdateBookmark = viewModel::updateBookmark,
+                    onSearchButtonClick = searchViewModel::updateSearchQuery,
+                    onClickUpdateBookmark = searchViewModel::updateBookmark,
                 )
             }
 
@@ -71,8 +109,8 @@ internal fun MainScreen(
             ) {
                 StorageScreen(
                     navigationHeight = navigationHeight,
-                    items = storageData,
-                    deleteItem = viewModel::deleteBookmark,
+                    items = storagePagingData,
+                    deleteItem = storageViewModel::deleteBookmark,
                 )
             }
         }

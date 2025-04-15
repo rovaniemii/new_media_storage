@@ -3,6 +3,7 @@ package com.rovaniemi.data.di
 import android.content.Context
 import androidx.room.Room
 import com.rovaniemi.data.room.StorageDatabase
+import com.rovaniemi.data.room.dao.StorageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +24,11 @@ object DataBaseModule {
             klass = StorageDatabase::class.java,
             name = "StorageDatabase_db"
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideStorageDao(storageDatabase: StorageDatabase): StorageDao {
+        return storageDatabase.storageDao()
     }
 }

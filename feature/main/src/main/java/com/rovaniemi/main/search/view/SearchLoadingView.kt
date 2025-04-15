@@ -1,4 +1,4 @@
-package com.rovaniemi.main.search
+package com.rovaniemi.main.search.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rovaniemi.ui.designsystem.loading.LottieAnimationView
 
@@ -27,4 +28,10 @@ internal fun SearchLoadingView(
             jsonString = "rocket_loading.json",
         )
     }
+}
+
+@Preview
+@Composable
+private fun PreviewSearchLoadingView(){
+    SearchLoadingView()
 }

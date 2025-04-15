@@ -18,6 +18,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.rovaniemi.main.common.view.ItemsGridView
 import com.rovaniemi.main.common.viewdata.SearchViewData
+import com.rovaniemi.main.search.view.SearchErrorView
+import com.rovaniemi.main.search.view.SearchLoadingView
+import com.rovaniemi.main.search.view.SearchWordInputView
 
 @Composable
 internal fun SearchScreen(
@@ -57,7 +60,7 @@ internal fun SearchScreen(
             is LoadState.NotLoading -> {
                 ItemsGridView(
                     navigationHeight = navigationHeight,
-                    items = items.itemSnapshotList.items,
+                    items = items,
                     onClickItem = onClickUpdateBookmark,
                 )
             }

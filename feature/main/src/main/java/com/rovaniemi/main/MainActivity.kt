@@ -1,6 +1,7 @@
 package com.rovaniemi.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -12,7 +13,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainScreen()
+            MainScreen(
+                handleToastMessage = { message ->
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                },
+            )
         }
     }
 }

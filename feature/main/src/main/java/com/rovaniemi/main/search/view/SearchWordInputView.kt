@@ -1,4 +1,4 @@
-package com.rovaniemi.main.search
+package com.rovaniemi.main.search.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

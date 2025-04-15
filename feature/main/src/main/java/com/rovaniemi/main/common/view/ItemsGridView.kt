@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
 import com.rovaniemi.main.common.viewdata.SearchViewData
 import com.rovaniemi.ui.util.DisableOverScroll
 
@@ -18,7 +19,7 @@ import com.rovaniemi.ui.util.DisableOverScroll
 internal fun ItemsGridView(
     modifier: Modifier = Modifier,
     navigationHeight: Dp,
-    items: List<SearchViewData>,
+    items: LazyPagingItems<SearchViewData>,
     onClickItem: ((item: SearchViewData) -> Unit)? = null,
 ) {
     DisableOverScroll {
@@ -37,15 +38,17 @@ internal fun ItemsGridView(
             ),
         ) {
             items(
-                count = items.size,
+                count = items.itemCount,
                 key = { index ->
                     items[index].hashCode()
                 },
             ) { index ->
-                SearchItemView(
-                    viewData = items[index],
-                    onClickUpdateBookmark = onClickItem,
-                )
+                items[index]?.let { viewData ->
+                    SearchItemView(
+                        viewData = viewData,
+                        onClickUpdateBookmark = onClickItem,
+                    )
+                }
             }
         }
     }

@@ -4,6 +4,7 @@ import com.rovaniemi.data.api.KakaoAPIService
 import com.rovaniemi.data.repository.RoomRepository
 import com.rovaniemi.data.repository.SearchRepository
 import com.rovaniemi.data.room.StorageDatabase
+import com.rovaniemi.data.room.dao.StorageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,8 +24,9 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideRoomRepository(
-        storageDatabase: StorageDatabase
+        storageDao: StorageDao,
+        storageDatabase: StorageDatabase,
     ): RoomRepository {
-        return RoomRepository(storageDatabase)
+        return RoomRepository(storageDao, storageDatabase)
     }
 }
