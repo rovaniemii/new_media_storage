@@ -31,6 +31,7 @@ import java.net.UnknownHostException
 internal fun SearchScreen(
     modifier: Modifier = Modifier,
     navigationHeight: Dp,
+    isSearchInitialized: Boolean,
     items: LazyPagingItems<SearchViewData>,
     onSearchButtonClick: (query: String) -> Unit,
     onClickUpdateBookmark: (item: SearchViewData) -> Unit,
@@ -81,19 +82,21 @@ internal fun SearchScreen(
             }
 
             is LoadState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    LottieAnimationView(
+                if (!isSearchInitialized) {
+                    Box(
                         modifier = Modifier
-                            .align(Alignment.Center)
-                            .size(
-                                size = 60.dp,
-                            ),
-                        jsonString = "rocket_loading.json",
-                    )
+                            .fillMaxSize(),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        LottieAnimationView(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .size(
+                                    size = 60.dp,
+                                ),
+                            jsonString = "rocket_loading.json",
+                        )
+                    }
                 }
             }
 
