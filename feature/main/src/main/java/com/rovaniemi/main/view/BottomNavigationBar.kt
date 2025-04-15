@@ -20,16 +20,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rovaniemi.main.model.NavItem
 
 @Composable
-fun BottomNavigationBar(
+internal fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     onClick: (screenRoute: String) -> Unit,
@@ -95,4 +97,13 @@ fun BottomNavigationBar(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun PreviewBottomNavigationBar(){
+    BottomNavigationBar(
+        navController = NavHostController(LocalContext.current),
+        onClick = {},
+    )
 }

@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
         data object InsertFail : BookmarkEvent()
     }
 
-    val searchPagingData = combine(
+    internal val searchPagingData = combine(
         _searchPagingData,
         _storageItems,
     ) { pagingData, storageList ->
@@ -64,7 +64,7 @@ class MainViewModel @Inject constructor(
         requestSearch(query)
     }
 
-    fun updateBookmark(item: SearchViewData) {
+    internal fun updateBookmark(item: SearchViewData) {
         viewModelScope.launch {
             try {
                 if (item.isBookmark) {

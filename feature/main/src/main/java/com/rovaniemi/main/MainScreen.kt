@@ -27,7 +27,7 @@ import com.rovaniemi.main.view.BottomNavigationBar
 import com.rovaniemi.main.viewmodel.MainViewModel
 
 @Composable
-fun MainScreen(
+internal fun MainScreen(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = viewModel(),
 ) {

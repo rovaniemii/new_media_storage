@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -72,11 +74,14 @@ internal fun SearchWordInputView(
             Image(
                 modifier = Modifier
                     .rippleClickable(
-                        shape = RoundedCornerShape(18.dp),
-                        onClick = onSearchButtonClick
+                        shape = CircleShape,
+                        onClick = onSearchButtonClick,
+                    )
+                    .padding(
+                        all = 4.dp,
                     ),
                 painter = painterResource(id = R.drawable.icon_search_20),
-                contentDescription = null
+                contentDescription = null,
             )
         },
     )

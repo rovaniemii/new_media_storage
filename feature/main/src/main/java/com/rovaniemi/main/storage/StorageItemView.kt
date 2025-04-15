@@ -2,6 +2,7 @@ package com.rovaniemi.main.storage
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
@@ -22,7 +23,7 @@ import com.rovaniemi.model.domain.StorageItem
 import com.rovaniemi.ui.designsystem.image.CoilImageView
 
 @Composable
-fun StorageItemView(
+internal fun StorageItemView(
     modifier: Modifier = Modifier,
     viewData: StorageItem,
 ) {
@@ -44,7 +45,8 @@ fun StorageItemView(
     ) {
         CoilImageView(
             modifier = Modifier
-                .width(200.dp),
+                .width(200.dp)
+                .aspectRatio(1f),
             imageUrl = viewData.thumbnail,
         )
 

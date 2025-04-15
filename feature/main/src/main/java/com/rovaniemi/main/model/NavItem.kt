@@ -3,7 +3,7 @@ package com.rovaniemi.main.model
 import androidx.annotation.DrawableRes
 import com.rovaniemi.main.R
 
-sealed class NavItem(
+internal sealed class NavItem(
     val title: Int,
     @DrawableRes val icon: Int,
     val screenRoute: String,

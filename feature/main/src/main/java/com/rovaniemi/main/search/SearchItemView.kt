@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -20,12 +21,11 @@ import androidx.compose.ui.unit.dp
 import com.rovaniemi.main.R
 import com.rovaniemi.main.model.SearchViewData
 import com.rovaniemi.ui.designsystem.image.CoilImageView
-import androidx.compose.material3.Text
 import com.rovaniemi.ui.extension.rippleClickable
 
 // todo storage와 search 같이 쓸 수 있도록 변경하기
 @Composable
-fun SearchItemView(
+internal fun SearchItemView(
     modifier: Modifier = Modifier,
     viewData: SearchViewData,
     onClickUpdateBookmark: (item: SearchViewData) -> Unit,
@@ -62,7 +62,7 @@ fun SearchItemView(
             modifier = Modifier
                 .rippleClickable(
                     shape = RoundedCornerShape(8.dp),
-                    onClick = { onClickUpdateBookmark(viewData) }
+                    onClick = { onClickUpdateBookmark(viewData) },
                 ),
             painter = painterResource(id = bookmarkIcon),
             tint = if (viewData.isBookmark) Color.Black else Color.LightGray,
