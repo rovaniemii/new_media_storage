@@ -37,6 +37,7 @@ fun MainScreen(
     val searchPagingData = viewModel.searchPagingData.collectAsLazyPagingItems()
     val storageData by viewModel.storageItems.collectAsState()
     val isSearchInitialized by viewModel.isSearchInitialized.collectAsState()
+    val cachedQuery by viewModel.cachedQuery.collectAsState()
 
     var navigationHeight by remember { mutableStateOf(0.dp) }
 
@@ -58,6 +59,7 @@ fun MainScreen(
                 SearchScreen(
                     navigationHeight = navigationHeight,
                     isSearchInitialized = isSearchInitialized,
+                    query = cachedQuery,
                     items = searchPagingData,
                     onSearchButtonClick = viewModel::updateSearchQuery,
                     onClickUpdateBookmark = viewModel::updateBookmark,

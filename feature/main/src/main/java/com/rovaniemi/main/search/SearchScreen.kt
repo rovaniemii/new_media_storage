@@ -32,11 +32,12 @@ internal fun SearchScreen(
     modifier: Modifier = Modifier,
     navigationHeight: Dp,
     isSearchInitialized: Boolean,
+    query: String,
     items: LazyPagingItems<SearchViewData>,
     onSearchButtonClick: (query: String) -> Unit,
     onClickUpdateBookmark: (item: SearchViewData) -> Unit,
 ) {
-    var searchQuery by remember { mutableStateOf("") }
+    var searchQuery by remember { mutableStateOf(query) }
 
     Column(
         modifier = modifier

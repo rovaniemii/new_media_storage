@@ -23,6 +23,7 @@ class MainViewModel @Inject constructor(
     private val _searchPagingData = MutableStateFlow<PagingData<SearchItem>>(PagingData.empty())
     private val _storageItems = MutableStateFlow<List<StorageItem>>(emptyList())
     private val _cachedQuery = MutableStateFlow("")
+    val cachedQuery =_cachedQuery.asStateFlow()
     private val _bookmarkEventFlow = MutableSharedFlow<BookmarkEvent>()
 
     private val _isSearchInitialized = MutableStateFlow(false)
