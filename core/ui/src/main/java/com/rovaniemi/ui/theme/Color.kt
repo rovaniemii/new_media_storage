@@ -1,4 +1,4 @@
-package com.rovaniemi.mediastorage.ui.theme
+package com.rovaniemi.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

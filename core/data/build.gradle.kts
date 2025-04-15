@@ -35,26 +35,23 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:network"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Kotlin
+    implementation(libs.bundles.kotlin)
 
     // Retrofit
     implementation(libs.bundles.retrofit)
 
-    // Moshi
-    implementation(libs.bundles.moshi)
+    // Util
+    implementation(libs.bundles.util)
 
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
     // Paging3
-    implementation(libs.bundles.androidx.pageing3)
+    implementation(libs.bundles.androidx.paging3)
 
     // Room
     implementation(libs.bundles.androidx.room)
+    ksp(libs.androidx.room.compiler)
 }

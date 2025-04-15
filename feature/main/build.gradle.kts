@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -34,18 +35,34 @@ android {
 dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:model"))
+    implementation(project(":core:ui"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Androidx Lifecycle
+    implementation(libs.bundles.androidx.lifecycle)
+
+    // Androidx Material3
+    implementation(libs.bundles.androidx.material3)
+
+    // Androidx-navigation
+    implementation(libs.bundles.androidx.navigation)
+
+    // Compose
+    implementation(libs.bundles.androidx.compose)
+
+    // Kotlin
+    implementation(libs.bundles.kotlin)
+
+    // Androidx
+    implementation(libs.bundles.androidx)
+
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
 
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
     // Paging3
-    implementation(libs.bundles.androidx.pageing3)
+    implementation(libs.bundles.androidx.paging3)
 }

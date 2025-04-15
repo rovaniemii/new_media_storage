@@ -1,16 +1,19 @@
 [versions]
-agp = "8.9.1"
+# Dependencies
+ksp = "2.1.20-1.0.32"
+androidGradlePlugin = "8.9.1"
+
+# Kotlin
 kotlin = "2.1.20"
+kotlinxCoroutinesAndroid = "1.10.1"
+
+# Androidx
 coreKtx = "1.16.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
-composeBom = "2024.09.00"
+
+# Material3
 appcompat = "1.7.0"
-material = "1.12.0"
-ksp = "2.1.20-1.0.32"
 
 # Retrofit
 retrofit = "2.11.0"
@@ -21,33 +24,70 @@ moshiKotlin = "1.15.0"
 moshicConverter = "2.9.0"
 
 # Hilt
-hilt-version = "2.55"
+hiltVersion = "2.55"
 hiltCompiler = "1.2.0"
-hiltLifecycleViewModel = "1.0.0-alpha03"
+
+# Androidx
+androidxLifecycle = "2.8.7"
 
 # Androidx-Paging3
-androidx-paging3 = "3.3.6"
+androidxPaging3 = "3.3.6"
 
 # Androidx-Room
-androidx-room = "2.7.0"
+androidxRoom = "2.7.0"
+
+# Compose
+composeBom = "2025.04.00"
+
+# Androidx Navigation
+navigationCompose = "2.8.9"
+
+# Coil
+coilCompose = "2.5.0"
+
+# Lottie
+lottie = "6.6.2"
+
+# Util
+gson = "2.11.0"
 
 [libraries]
+# Kotlin
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+
+# Androidx
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+
+# Androidx Lifecycle
+androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltCompiler" }
+
+# Androidx Material3
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Androidx Navigation
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+# Androidx Compose
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+
+# Compose
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-animation = { group = "androidx.compose.animation", name = "animation" }
+compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
 
 # Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -61,54 +101,128 @@ moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "mosh
 moshi-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshicConverter" }
 
 # Hilt
-androidx-hilt-lifecycle-viewmodel = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "hiltLifecycleViewModel" }
-androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltCompiler" }
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-version" }
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-version" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
+hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 
 # Androidx-Paging3
-androidx-paing3 = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidx-paging3" }
-androidx-paing3-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidx-paging3" }
+androidx-paging3 = { group = "androidx.paging", name = "paging-runtime", version.ref = "androidxPaging3" }
+androidx-paging3-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "androidxPaging3" }
 
 # Androidx-Room
-room-gradle-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidx-room" }
-androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
-androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
-androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "androidx-room" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+room-gradle-plugin = { group = "androidx.room", name = "room-gradle-plugin", version.ref = "androidxRoom" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidxRoom" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidxRoom" }
+androidx-room-rxjava3 = { group = "androidx.room", name = "room-rxjava3", version.ref = "androidxRoom" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidxRoom" }
+
+# Coil
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+
+# Lottie
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+
+# Util
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 [bundles]
+# Kotlin Libraries
+kotlin = [
+    "kotlin-stdlib",
+    "kotlinx-coroutines-android"
+]
+
+# Androidx Libraries
+androidx = [
+    "androidx-core-ktx",
+    "androidx-lifecycle-runtime-ktx",
+    "androidx-activity-compose",
+    "androidx-ui-graphics",
+    "androidx-ui-tooling",
+    "androidx-ui-tooling-preview",
+    "androidx-ui-test-manifest",
+    "androidx-ui-test-junit4"
+]
+
+# Androidx Lifecycle
+androidx-lifecycle = [
+    "androidx-hilt-navigation-fragment"
+]
+
+# Androidx Material3
+androidx-material3 = [
+    "androidx-material3",
+    "androidx-appcompat"
+]
+
+# Androidx-navigation
+androidx-navigation = [
+    "androidx-navigation-compose"
+]
+
+# Androidx Compose
+androidx-compose = [
+    "androidx-lifecycle-viewmodel-compose"
+]
+
+# Compose
+compose = [
+    "compose-animation",
+    "compose-foundation",
+    "compose-foundation-layout",
+    "compose-runtime",
+    "compose-ui",
+    "compose-ui-tooling",
+    "compose-ui-util",
+]
+
+# Retrofit Libraries
 retrofit = [
     "retrofit",
     "retrofit-converter-gson",
     "okhttp3",
-    "okhttp3-logging",
+    "okhttp3-logging"
 ]
+
+# Moshi Libraries
 moshi = [
     "moshi",
     "moshi-kotlin",
-    "moshi-converter",
+    "moshi-converter"
 ]
-lifecycle-hilt = [
-    "androidx-hilt-lifecycle-viewmodel",
-    "androidx-hilt-navigation-fragment",
+
+
+# Androidx Paging3
+androidx-paging3 = [
+    "androidx-paging3",
+    "androidx-paging3-compose"
 ]
-androidx-pageing3 = [
-    "androidx-paing3",
-    "androidx-paing3-compose"
-]
+
+# Androidx Room
 androidx-room = [
+    "room-gradle-plugin",
     "androidx-room-runtime",
     "androidx-room-ktx",
     "androidx-room-rxjava3",
-    "androidx-room-compiler",
-    "room-gradle-plugin",
+]
+
+# Coil Libraries
+coil = [
+    "coil-compose",
+]
+
+# Lottie Libraries
+lottie = [
+    "lottie-compose"
+]
+
+util = [
+    "gson"
 ]
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "agp" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt-version" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

@@ -7,3 +7,9 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ksp) apply false
 }
+
+subprojects {
+    configurations.all {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+}

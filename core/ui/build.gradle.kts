@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -30,11 +31,28 @@ android {
 }
 
 dependencies {
+    // Androidx Material3
+    implementation(libs.bundles.androidx.material3)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    // Androidx-navigation
+    implementation(libs.bundles.androidx.navigation)
+
+    // Compose
+    implementation(libs.bundles.androidx.compose)
+
+    // Kotlin
+    implementation(libs.bundles.kotlin)
+
+    // Androidx
+    implementation(libs.bundles.androidx)
+
+    // Compose
+    implementation(platform(libs.compose.bom))
+    // implementation(libs.bundles.compose)
+
+    // Coil
+    implementation(libs.bundles.coil)
+
+    // Lottie
+    implementation(libs.bundles.lottie)
 }
