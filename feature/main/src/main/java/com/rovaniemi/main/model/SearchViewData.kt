@@ -1,6 +1,6 @@
-package com.rovaniemi.model.domain
+package com.rovaniemi.main.model
 
-class StorageItem(
+data class SearchViewData(
     val id: Long,
     val thumbnail: String,
     val dateTime: String,

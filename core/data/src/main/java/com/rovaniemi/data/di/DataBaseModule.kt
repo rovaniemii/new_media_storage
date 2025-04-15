@@ -6,8 +6,9 @@ import com.rovaniemi.data.room.StorageDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import jakarta.inject.Singleton
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -15,7 +16,7 @@ object DataBaseModule {
     @Provides
     @Singleton
     fun provideStorageDatabase(
-        context: Context,
+        @ApplicationContext context: Context,
     ): StorageDatabase {
         return Room.databaseBuilder(
             context = context,
