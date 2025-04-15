@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_search">"search"</string>
+    <string name="nav_bookmarks">"bookmark"</string>
+
+    <string name="go_to_pre">"이전 화면으로 돌아갑니다."</string>
+    <string name="search_query_hint_message">"검색어를 입력해주세요."</string>
+    <string name="search_paging_network_message">"네트워크 연결을 확인해주세요."</string>
+    <string name="search_paging_no_search_message">"검색 결과가 없습니다."</string>
+    <string name="search_paging_unknown_error_message">"알 수 없는 오류가 발생했어요."</string>
+    <string name="bookmarks_empty_bookmarks_message">"내 보관함에 이미지가 없습니다."</string>
+</resources>
