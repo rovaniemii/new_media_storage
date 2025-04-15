@@ -1,9 +1,11 @@
 package com.rovaniemi.main.search
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -14,8 +16,10 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rovaniemi.main.R
@@ -40,33 +44,52 @@ internal fun SearchItemView(
         )
     }
 
-    Row(
+    Column(
         modifier = modifier
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+            .fillMaxWidth()
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(8.dp),
+            )
+            .rippleClickable(
+                shape = RoundedCornerShape(8.dp),
+                onClick = { onClickUpdateBookmark(viewData) },
+            )
+            .padding(
+                all = 8.dp,
+            ),
     ) {
-        CoilImageView(
-            modifier = Modifier
-                .width(200.dp),
-            imageUrl = viewData.thumbnail,
-        )
+        Box {
+            CoilImageView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f)
+                    .clip(
+                        shape = RoundedCornerShape(8.dp),
+                    ),
+                imageUrl = viewData.thumbnail,
+            )
+
+            Icon(
+                modifier = Modifier
+                    .padding(
+                        all = 8.dp,
+                    )
+                    .align(Alignment.TopEnd),
+                painter = painterResource(id = bookmarkIcon),
+                tint = if (viewData.isBookmark) Color.Black else Color.LightGray,
+                contentDescription = null,
+            )
+        }
 
         Text(
             modifier = Modifier
-                .weight(1f),
-            text = viewData.dateTime,
-        )
-
-        Icon(
-            modifier = Modifier
-                .rippleClickable(
-                    shape = RoundedCornerShape(8.dp),
-                    onClick = { onClickUpdateBookmark(viewData) },
+                .fillMaxWidth()
+                .padding(
+                    vertical = 12.dp,
                 ),
-            painter = painterResource(id = bookmarkIcon),
-            tint = if (viewData.isBookmark) Color.Black else Color.LightGray,
-            contentDescription = null,
+            text = viewData.dateTime,
+            textAlign = TextAlign.Center,
         )
     }
 }

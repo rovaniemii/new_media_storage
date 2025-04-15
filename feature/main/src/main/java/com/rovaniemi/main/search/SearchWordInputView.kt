@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Surface
@@ -38,7 +37,10 @@ internal fun SearchWordInputView(
     val isShowButton by remember(initValue) { mutableStateOf(initValue.isNotEmpty()) }
 
     InputView(
-        modifier = modifier,
+        modifier = modifier
+            .padding(
+                vertical = 12.dp,
+            ),
         initValue = initValue,
         hint = stringResource(R.string.search_query_hint_message),
         onValueChange = onValueChange,
@@ -68,7 +70,7 @@ internal fun SearchWordInputView(
                     contentDescription = null,
                 )
 
-                Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.width(8.dp))
             }
 
             Image(

@@ -1,9 +1,11 @@
 package com.rovaniemi.main.storage
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
@@ -43,23 +45,22 @@ internal fun StorageItemView(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        CoilImageView(
+        Box(
             modifier = Modifier
-                .width(200.dp)
-                .aspectRatio(1f),
-            imageUrl = viewData.thumbnail,
-        )
+                .weight(1f),
+        ) {
+            CoilImageView(
+                modifier = Modifier
+                    .width(200.dp)
+                    .aspectRatio(1f),
+                imageUrl = viewData.thumbnail,
+            )
+        }
 
         Text(
             modifier = Modifier
                 .weight(1f),
             text = viewData.dateTime,
-        )
-
-        Icon(
-            painter = painterResource(id = bookmarkIcon),
-            tint = if (viewData.isBookmark) Color.Black else Color.LightGray,
-            contentDescription = null,
         )
     }
 }

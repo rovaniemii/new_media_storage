@@ -1,17 +1,23 @@
 package com.rovaniemi.main.search
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.rovaniemi.main.model.SearchViewData
@@ -31,11 +37,17 @@ internal fun SearchScreen(
 
     Column(
         modifier = modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(
+                color = Color.White,
+            ),
     ) {
         SearchWordInputView(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 12.dp,
+                ),
             initValue = searchQuery,
             onValueChange = {
                 searchQuery = it
@@ -48,9 +60,13 @@ internal fun SearchScreen(
         when (val loadState = items.loadState.refresh) {
             is LoadState.NotLoading -> {
                 DisableOverScroll {
-                    LazyColumn(
+                    LazyVerticalGrid(
                         modifier = Modifier
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 4.dp,
+                            ),
+                        columns = GridCells.Fixed(2),
                         contentPadding = PaddingValues(
                             bottom = navigationHeight,
                         ),
