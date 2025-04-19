@@ -1,4 +1,4 @@
-package com.rovaniemi.model.domain
+package com.rovaniemii.model_domain
 
 class StorageItem(
     val id: Long,

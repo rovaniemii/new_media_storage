@@ -32,7 +32,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model"))
+    implementation(project(":core:model-dto"))
+    implementation(project(":core:model-entity"))
+    implementation(project(":core:model-domain"))
     implementation(project(":core:network"))
 
     // Kotlin

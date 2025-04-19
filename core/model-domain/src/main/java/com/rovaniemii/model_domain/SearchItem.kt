@@ -1,4 +1,4 @@
-package com.rovaniemi.model.domain
+package com.rovaniemii.model_domain
 
 data class SearchItem(
     val id: Long,

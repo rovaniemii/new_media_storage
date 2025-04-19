@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.rovaniemi.data.api.KakaoAPIService
 import com.rovaniemi.data.paging.SearchPagingSource
-import com.rovaniemi.model.domain.SearchItem
+import com.rovaniemii.model_domain.SearchItem
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

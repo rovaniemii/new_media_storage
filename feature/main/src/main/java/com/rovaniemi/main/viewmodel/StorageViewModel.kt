@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.rovaniemi.data.repository.RoomRepository
 import com.rovaniemi.main.compose.viewdata.SearchViewData
-import com.rovaniemi.model.domain.StorageItem
+import com.rovaniemii.model_domain.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

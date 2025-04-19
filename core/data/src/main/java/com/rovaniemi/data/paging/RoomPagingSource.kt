@@ -3,7 +3,7 @@ package com.rovaniemi.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.rovaniemi.data.room.dao.StorageDao
-import com.rovaniemi.model.domain.StorageItem
+import com.rovaniemii.model_domain.StorageItem
 import javax.inject.Inject
 
 class RoomPagingSource @Inject constructor(

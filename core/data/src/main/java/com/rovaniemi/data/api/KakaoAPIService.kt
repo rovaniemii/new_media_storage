@@ -1,9 +1,8 @@
 package com.rovaniemi.data.api
 
-import com.rovaniemi.model.dto.ImageDTO
-import com.rovaniemi.model.dto.VideoDTO
-import com.rovaniemi.model.response.ResponseDTO
 import com.rovaniemi.network.constant.KakaoConstant
+import com.rovaniemii.model_dto.dto.KakaoDTO
+import com.rovaniemii.model_dto.response.ResponseDTO
 
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,7 +14,7 @@ interface KakaoAPIService {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
-    ): ResponseDTO<ImageDTO>
+    ): ResponseDTO<KakaoDTO.Image>
 
     @GET(KakaoConstant.KAKAO_VIDEO_URL)
     suspend fun searchVideos(
@@ -23,5 +22,5 @@ interface KakaoAPIService {
         @Query("query") query: String,
         @Query("page") page: Int,
         @Query("size") size: Int,
-    ): ResponseDTO<VideoDTO>
+    ): ResponseDTO<KakaoDTO.Video>
 }

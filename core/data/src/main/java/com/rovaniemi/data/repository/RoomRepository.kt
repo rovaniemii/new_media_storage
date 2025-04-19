@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import com.rovaniemi.data.paging.RoomPagingSource
 import com.rovaniemi.data.room.StorageDatabase
 import com.rovaniemi.data.room.dao.StorageDao
-import com.rovaniemi.model.domain.StorageItem
 import com.rovaniemi.model.entity.StorageEntity
+import com.rovaniemii.model_domain.StorageItem
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

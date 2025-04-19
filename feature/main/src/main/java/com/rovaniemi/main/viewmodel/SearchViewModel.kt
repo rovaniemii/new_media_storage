@@ -8,8 +8,7 @@ import androidx.paging.map
 import com.rovaniemi.data.repository.RoomRepository
 import com.rovaniemi.data.repository.SearchRepository
 import com.rovaniemi.main.compose.viewdata.SearchViewData
-import com.rovaniemi.model.domain.SearchItem
-import com.rovaniemi.model.domain.StorageItem
+import com.rovaniemii.model_domain.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +30,7 @@ class SearchViewModel @Inject constructor(
         data class Fail(val message: String) : BookmarkEvent()
     }
 
-    private val _searchPagingData = MutableStateFlow<PagingData<SearchItem>>(PagingData.empty())
+    private val _searchPagingData = MutableStateFlow<PagingData<com.rovaniemii.model_domain.SearchItem>>(PagingData.empty())
     private val _storageItemsGetAll = MutableStateFlow<List<StorageItem>>(emptyList())
 
     private val _searchQuery = MutableStateFlow("")
