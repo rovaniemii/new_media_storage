@@ -26,6 +26,7 @@
 - **UX 최적화**  
   - 검색 후 키보드 자동 숨김, 로딩/에러/빈 상태 UI 명확하게 분리  
   - 상태에 따른 안내 문구 및 터치 영역 최적화
+  - 폴더블 및 대형 화면 대응을 위한 유연한 레이아웃 구성
 
 </br>
 
@@ -35,6 +36,7 @@
 - **UI Framework**: Jetpack Compose  
   - 상태 관리: `remember`, `mutableStateOf`, `collectAsState`, `stateIn`, `asStateFlow`, `LaunchedEffect`
   - 동적 UI: `LazyPagingItems`, `LoadState` 대응
+  - **디바이스 대응**: FoldingFeature, WindowLayoutInfo, screenWidthDp, 모델명 기반으로 폴더블/태블릿 UI 최적화
 - **비동기 처리**: Kotlin Flow + Coroutine
 - **DI (Dependency Injection)**: Hilt
 - **Networking**: Retrofit + Gson
