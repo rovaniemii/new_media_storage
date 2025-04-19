@@ -7,6 +7,7 @@ import com.rovaniemi.data.paging.RoomPagingSource
 import com.rovaniemi.data.room.StorageDatabase
 import com.rovaniemi.data.room.dao.StorageDao
 import com.rovaniemi.model.entity.StorageEntity
+import com.rovaniemi.network.constant.KakaoConstant
 import com.rovaniemii.domain.model.StorageItem
 import com.rovaniemii.domain.repository.RoomRepository
 import kotlinx.coroutines.flow.Flow
@@ -19,7 +20,7 @@ class RoomRepositoryImpl @Inject constructor(
     override fun getItemsPaged(): Flow<PagingData<StorageItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 30,
+                pageSize = KakaoConstant.LOAD_PAGE_SIZE,
                 enablePlaceholders = false,
             ),
             pagingSourceFactory = { RoomPagingSource(dao) },

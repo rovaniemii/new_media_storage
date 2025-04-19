@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.rovaniemi.data.api.KakaoAPIService
 import com.rovaniemi.data.paging.SearchPagingSource
+import com.rovaniemi.network.constant.KakaoConstant
 import com.rovaniemii.domain.model.SearchItem
 import com.rovaniemii.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +17,7 @@ class SearchRepositoryImpl @Inject constructor(
     override fun getSearchPagingSource(query: String): Flow<PagingData<SearchItem>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 30,
+                pageSize = KakaoConstant.LOAD_PAGE_SIZE,
                 enablePlaceholders = false,
             ),
             pagingSourceFactory = {
