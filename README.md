@@ -57,7 +57,7 @@
 │  ├─ 📁 paging         # Paging 관련 유틸
 │  ├─ 📁 repository     # Repository 구현체
 │  └─ 📁 room           # Room DAO 및 DB 설정
-├─ 📂 model-domain      # 도메인 레이어 모델 정의
+├─ 📂 domain            # 도메인 레이어 모델 및 Repository 인터페이스 정의
 ├─ 📂 model-dto         # API 응답 DTO 정의
 ├─ 📂 model-entity      # 로컬 DB Entity 정의
 ├─ 📂 network
