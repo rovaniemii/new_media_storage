@@ -11,8 +11,10 @@ import com.rovaniemii.model_domain.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,9 +27,11 @@ class StorageViewModel @Inject constructor(
         data class DeleteFail(val message: String) : BookmarkEvent()
     }
 
+    private val _refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
     private val _bookmarkEventFlow = MutableSharedFlow<BookmarkEvent>()
     val bookmarkEventFlow = _bookmarkEventFlow.asSharedFlow()
 
+    // https://proandroiddev.com/loading-initial-data-in-launchedeffect-vs-viewmodel-f1747c20ce62
     private val _storagePagingData = MutableStateFlow<PagingData<StorageItem>>(PagingData.empty())
     internal val storagePagingData = _storagePagingData.map { pagingData ->
         pagingData.map { item ->
@@ -38,9 +42,17 @@ class StorageViewModel @Inject constructor(
                 isBookmark = true,
             )
         }
-    }.cachedIn(viewModelScope)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = PagingData.empty(),
+    )
 
     init {
+        viewModelScope.launch {
+            _refreshTrigger.emit(Unit)
+        }
+
         viewModelScope.launch {
             roomRepository
                 .getItemsPaged()
@@ -60,5 +72,9 @@ class StorageViewModel @Inject constructor(
                 _bookmarkEventFlow.emit(BookmarkEvent.DeleteFail("삭제에 실패했습니다."))
             }
         }
+    }
+
+    fun refreshStorage() {
+        _refreshTrigger.tryEmit(Unit)
     }
 }

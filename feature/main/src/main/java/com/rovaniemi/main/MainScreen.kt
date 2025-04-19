@@ -43,6 +43,7 @@ internal fun MainScreen(
 
     val searchPagingData = searchViewModel.searchPagingData.collectAsLazyPagingItems()
     val storagePagingData = storageViewModel.storagePagingData.collectAsLazyPagingItems()
+
     val searchQuery by searchViewModel.searchQuery.collectAsState()
     val noNeedToLoading by searchViewModel.noNeedToLoading.collectAsState(false)
 
@@ -54,7 +55,7 @@ internal fun MainScreen(
                 when (event) {
                     is SearchViewModel.BookmarkEvent.Success -> {
                         searchViewModel.refreshStorage()
-                        storagePagingData.refresh()
+                        storageViewModel.refreshStorage()
                     }
 
                     is SearchViewModel.BookmarkEvent.Fail -> {
@@ -68,7 +69,7 @@ internal fun MainScreen(
             storageViewModel.bookmarkEventFlow.collect { event ->
                 when (event) {
                     is StorageViewModel.BookmarkEvent.DeleteSuccess -> {
-                        storagePagingData.refresh()
+                        storageViewModel.refreshStorage()
                     }
 
                     is StorageViewModel.BookmarkEvent.DeleteFail -> {

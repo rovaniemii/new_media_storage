@@ -12,11 +12,13 @@ import com.rovaniemii.model_domain.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,7 +32,8 @@ class SearchViewModel @Inject constructor(
         data class Fail(val message: String) : BookmarkEvent()
     }
 
-    private val _searchPagingData = MutableStateFlow<PagingData<com.rovaniemii.model_domain.SearchItem>>(PagingData.empty())
+    private val _searchPagingData =
+        MutableStateFlow<PagingData<com.rovaniemii.model_domain.SearchItem>>(PagingData.empty())
     private val _storageItemsGetAll = MutableStateFlow<List<StorageItem>>(emptyList())
 
     private val _searchQuery = MutableStateFlow("")
@@ -43,6 +46,7 @@ class SearchViewModel @Inject constructor(
     private val cachedQuery = _cachedQuery.asStateFlow()
     val noNeedToLoading = cachedQuery.map { it.isNotBlank() }
 
+    // https://proandroiddev.com/loading-initial-data-in-launchedeffect-vs-viewmodel-f1747c20ce62
     internal val searchPagingData = combine(
         _searchPagingData,
         _storageItemsGetAll,
@@ -55,7 +59,11 @@ class SearchViewModel @Inject constructor(
                 isBookmark = storageList.any { it.id == item.id && it.isBookmark }
             )
         }
-    }.cachedIn(viewModelScope)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000),
+        initialValue = PagingData.empty(),
+    )
 
     init {
         viewModelScope.launch {
