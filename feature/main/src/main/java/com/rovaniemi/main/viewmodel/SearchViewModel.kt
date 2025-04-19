@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,17 +31,18 @@ class SearchViewModel @Inject constructor(
         data class Fail(val message: String) : BookmarkEvent()
     }
 
-    private val _isSearchInitialized = MutableStateFlow(false)
-    val isSearchInitialized = _isSearchInitialized.asStateFlow()
-
     private val _searchPagingData = MutableStateFlow<PagingData<SearchItem>>(PagingData.empty())
     private val _storageItemsGetAll = MutableStateFlow<List<StorageItem>>(emptyList())
 
-    private val _cachedQuery = MutableStateFlow("")
-    val cachedQuery = _cachedQuery.asStateFlow()
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery = _searchQuery.asStateFlow()
 
     private val _bookmarkEventFlow = MutableSharedFlow<BookmarkEvent>()
     val bookmarkEventFlow = _bookmarkEventFlow.asSharedFlow()
+
+    private val _cachedQuery = MutableStateFlow("")
+    private val cachedQuery = _cachedQuery.asStateFlow()
+    val noNeedToLoading = cachedQuery.map { it.isNotBlank() }
 
     internal val searchPagingData = combine(
         _searchPagingData,
@@ -57,17 +59,19 @@ class SearchViewModel @Inject constructor(
     }.cachedIn(viewModelScope)
 
     init {
-        _isSearchInitialized.value = true
         viewModelScope.launch {
             _storageItemsGetAll.value = roomRepository.getAll()
         }
     }
 
     fun updateSearchQuery(query: String) {
-        if (_cachedQuery.value == query) return
+        _searchQuery.value = query
+    }
 
-        _isSearchInitialized.value = false
-        requestSearch(query)
+    fun searchButtonClick() {
+        if (cachedQuery.value == searchQuery.value) return
+
+        requestSearch(searchQuery.value)
     }
 
     private fun requestSearch(query: String) {

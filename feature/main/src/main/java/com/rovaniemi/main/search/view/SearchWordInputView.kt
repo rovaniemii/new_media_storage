@@ -30,7 +30,7 @@ import com.rovaniemi.ui.extension.rippleClickable
 internal fun SearchWordInputView(
     modifier: Modifier = Modifier,
     initValue: String,
-    onValueChange: (changedValue: String) -> Unit,
+    onQueryChange: (changedValue: String) -> Unit,
     onSearchButtonClick: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
@@ -43,7 +43,7 @@ internal fun SearchWordInputView(
             ),
         initValue = initValue,
         hint = stringResource(R.string.search_query_hint_message),
-        onValueChange = onValueChange,
+        onValueChange = onQueryChange,
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Search
         ),
@@ -63,7 +63,7 @@ internal fun SearchWordInputView(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null,
                             onClick = {
-                                onValueChange("")
+                                onQueryChange("")
                             },
                         ),
                     painter = painterResource(R.drawable.icon_clear_20),
@@ -97,7 +97,7 @@ private fun PreviewSearchWordInputView() {
 
         SearchWordInputView(
             initValue = initValue,
-            onValueChange = {
+            onQueryChange = {
                 initValue = it
             },
             onSearchButtonClick = {},

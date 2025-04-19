@@ -30,14 +30,13 @@ import kotlinx.coroutines.flow.flowOf
 internal fun SearchScreen(
     modifier: Modifier = Modifier,
     navigationHeight: Dp,
-    isSearchInitialized: Boolean,
-    query: String,
+    noNeedToLoad: Boolean,
+    searchQuery: String,
     items: LazyPagingItems<SearchViewData>,
-    onSearchButtonClick: (query: String) -> Unit,
+    onQueryChange: (query: String) -> Unit,
+    onSearchButtonClick: () -> Unit,
     onClickUpdateBookmark: (item: SearchViewData) -> Unit,
 ) {
-    var searchQuery by remember { mutableStateOf(query) }
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -52,12 +51,8 @@ internal fun SearchScreen(
                     horizontal = 12.dp,
                 ),
             initValue = searchQuery,
-            onValueChange = {
-                searchQuery = it
-            },
-            onSearchButtonClick = {
-                onSearchButtonClick(searchQuery)
-            },
+            onQueryChange = onQueryChange,
+            onSearchButtonClick = onSearchButtonClick,
         )
 
         when (val loadState = items.loadState.refresh) {
@@ -70,7 +65,7 @@ internal fun SearchScreen(
             }
 
             is LoadState.Loading -> {
-                if (!isSearchInitialized) {
+                if (noNeedToLoad) {
                     SearchLoadingView()
                 }
             }
@@ -87,6 +82,8 @@ internal fun SearchScreen(
 @Preview
 @Composable
 private fun PreviewSearchScreen() {
+    var query by remember { mutableStateOf("") }
+
     fun fakeItems(): List<SearchViewData> = listOf(
         SearchViewData(
             id = 1L,
@@ -113,9 +110,10 @@ private fun PreviewSearchScreen() {
 
     SearchScreen(
         navigationHeight = 0.dp,
-        isSearchInitialized = true,
-        query = "부산",
+        noNeedToLoad = false,
+        searchQuery = query,
         items = lazyItems,
+        onQueryChange = { query = it },
         onSearchButtonClick = {},
         onClickUpdateBookmark = {}
     )
