@@ -1,4 +1,4 @@
-package com.rovaniemi.main.common.view
+package com.rovaniemi.main.compose.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rovaniemi.main.R
-import com.rovaniemi.main.common.viewdata.SearchViewData
+import com.rovaniemi.main.compose.viewdata.SearchViewData
 import com.rovaniemi.ui.designsystem.image.CoilImageView
 import com.rovaniemi.ui.extension.rippleClickable
 

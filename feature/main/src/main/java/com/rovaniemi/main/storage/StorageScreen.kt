@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.paging.compose.LazyPagingItems
-import com.rovaniemi.main.common.view.ItemsGridView
-import com.rovaniemi.main.common.viewdata.SearchViewData
+import com.rovaniemi.main.compose.view.ItemsGridView
+import com.rovaniemi.main.compose.viewdata.SearchViewData
 
 @Composable
 internal fun StorageScreen(

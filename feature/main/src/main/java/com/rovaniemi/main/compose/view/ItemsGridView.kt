@@ -1,4 +1,4 @@
-package com.rovaniemi.main.common.view
+package com.rovaniemi.main.compose.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.rovaniemi.main.common.viewdata.SearchViewData
+import com.rovaniemi.main.compose.viewdata.SearchViewData
 import com.rovaniemi.ui.util.DisableOverScroll
 
 @Composable

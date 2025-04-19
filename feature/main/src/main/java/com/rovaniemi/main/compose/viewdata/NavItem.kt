@@ -1,4 +1,4 @@
-package com.rovaniemi.main.common.viewdata
+package com.rovaniemi.main.compose.viewdata
 
 import androidx.annotation.DrawableRes
 import com.rovaniemi.main.R

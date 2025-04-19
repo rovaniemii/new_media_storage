@@ -1,4 +1,4 @@
-package com.rovaniemi.main.common.view
+package com.rovaniemi.main.compose.view
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.rovaniemi.main.common.viewdata.NavItem
+import com.rovaniemi.main.compose.viewdata.NavItem
 
 @Composable
 internal fun BottomNavigationBar(

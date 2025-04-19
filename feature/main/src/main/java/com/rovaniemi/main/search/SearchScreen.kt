@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.rovaniemi.main.common.view.ItemsGridView
-import com.rovaniemi.main.common.viewdata.SearchViewData
+import com.rovaniemi.main.compose.view.ItemsGridView
+import com.rovaniemi.main.compose.viewdata.SearchViewData
 import com.rovaniemi.main.search.view.SearchErrorView
 import com.rovaniemi.main.search.view.SearchLoadingView
 import com.rovaniemi.main.search.view.SearchWordInputView

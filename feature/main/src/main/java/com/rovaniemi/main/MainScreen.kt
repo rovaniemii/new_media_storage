@@ -21,16 +21,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.rovaniemi.main.common.view.BottomNavigationBar
-import com.rovaniemi.main.common.viewdata.ScreenType
+import com.rovaniemi.main.compose.view.BottomNavigationBar
+import com.rovaniemi.main.compose.viewdata.ScreenType
 import com.rovaniemi.main.search.SearchScreen
 import com.rovaniemi.main.storage.StorageScreen
 import com.rovaniemi.main.viewmodel.SearchViewModel
 import com.rovaniemi.main.viewmodel.StorageViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
-@OptIn(FlowPreview::class)
 @Composable
 internal fun MainScreen(
     modifier: Modifier = Modifier,

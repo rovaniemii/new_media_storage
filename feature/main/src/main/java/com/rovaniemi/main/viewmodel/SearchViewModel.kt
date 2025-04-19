@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.rovaniemi.data.repository.RoomRepository
 import com.rovaniemi.data.repository.SearchRepository
-import com.rovaniemi.main.common.viewdata.SearchViewData
+import com.rovaniemi.main.compose.viewdata.SearchViewData
 import com.rovaniemi.model.domain.SearchItem
 import com.rovaniemi.model.domain.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
