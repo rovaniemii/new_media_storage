@@ -1,6 +1,6 @@
 package com.rovaniemi.network.di
 
-import com.rovaniemi.network.constant.KakaoConstant
+import com.rovaniemi.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +20,7 @@ object NetworkModule {
         client: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(KakaoConstant.KAKAO_BASE_URL)
+            .baseUrl(BuildConfig.KAKAO_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
