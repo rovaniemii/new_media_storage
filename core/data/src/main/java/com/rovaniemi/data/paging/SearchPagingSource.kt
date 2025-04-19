@@ -3,15 +3,15 @@ package com.rovaniemi.data.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.rovaniemi.data.api.KakaoAPIService
-import com.rovaniemii.model_domain.SearchItem
+import com.rovaniemii.domain.model.SearchItem
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class SearchPagingSource(
     private val kakaoAPIService: KakaoAPIService,
     private val query: String,
-) : PagingSource<Int, com.rovaniemii.model_domain.SearchItem>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, com.rovaniemii.model_domain.SearchItem> {
+) : PagingSource<Int, SearchItem>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchItem> {
         return try {
             val page = params.key ?: 1
             val pageSize = params.loadSize
@@ -21,7 +21,7 @@ class SearchPagingSource(
                     page = page,
                     size = pageSize,
                 ).documents.map {
-                    com.rovaniemii.model_domain.SearchItem(
+                    SearchItem(
                         id = it.thumbnailUrl.hashCode().toLong(),
                         thumbnail = it.thumbnailUrl,
                         dateTime = it.dateTime,
@@ -33,7 +33,7 @@ class SearchPagingSource(
                     page = page,
                     size = pageSize,
                 ).documents.map {
-                    com.rovaniemii.model_domain.SearchItem(
+                    SearchItem(
                         id = it.thumbnail.hashCode().toLong(),
                         thumbnail = it.thumbnail,
                         dateTime = it.dateTime,
@@ -51,14 +51,14 @@ class SearchPagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, com.rovaniemii.model_domain.SearchItem>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, SearchItem>): Int? {
         return state.anchorPosition?.let { anchor ->
             val anchorPage = state.closestPageToPosition(anchor)
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
     }
 
-    private fun List<com.rovaniemii.model_domain.SearchItem>.sortedByDescendingDateTime(): List<com.rovaniemii.model_domain.SearchItem> {
+    private fun List<SearchItem>.sortedByDescendingDateTime(): List<SearchItem> {
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
         return sortedByDescending {
             try {

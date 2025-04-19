@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.rovaniemi.data"
+    namespace = "com.rovaniemii.model_domain"
     compileSdk = 35
 
     defaultConfig {
@@ -19,7 +17,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -32,28 +33,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:model-dto"))
-    implementation(project(":core:model-entity"))
-    implementation(project(":core:domain"))
-
     // Kotlin
     implementation(libs.bundles.kotlin)
 
-    // Retrofit
-    implementation(libs.bundles.retrofit)
-
-    // Util
-    implementation(libs.bundles.util)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-
     // Paging3
     implementation(libs.bundles.androidx.paging3)
-
-    // Room
-    implementation(libs.bundles.androidx.room)
-    ksp(libs.androidx.room.compiler)
 }

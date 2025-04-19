@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.rovaniemi.data.repository.RoomRepository
+import com.rovaniemi.data.repository.RoomRepositoryImpl
 import com.rovaniemi.main.compose.viewdata.SearchViewData
-import com.rovaniemii.model_domain.StorageItem
+import com.rovaniemii.domain.model.StorageItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StorageViewModel @Inject constructor(
-    private val roomRepository: RoomRepository,
+    private val roomRepositoryImpl: RoomRepositoryImpl,
 ) : ViewModel() {
     sealed class BookmarkEvent {
         data object DeleteSuccess : BookmarkEvent()
@@ -54,7 +54,7 @@ class StorageViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            roomRepository
+            roomRepositoryImpl
                 .getItemsPaged()
                 .cachedIn(viewModelScope)
                 .collect { pagingData ->
@@ -66,7 +66,7 @@ class StorageViewModel @Inject constructor(
     fun deleteBookmark(id: Long) {
         viewModelScope.launch {
             try {
-                roomRepository.deleteBookmark(id)
+                roomRepositoryImpl.deleteBookmark(id)
                 _bookmarkEventFlow.emit(BookmarkEvent.DeleteSuccess)
             } catch (e: Exception) {
                 _bookmarkEventFlow.emit(BookmarkEvent.DeleteFail("삭제에 실패했습니다."))
