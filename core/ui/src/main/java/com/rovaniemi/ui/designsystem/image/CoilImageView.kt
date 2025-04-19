@@ -14,20 +14,23 @@ import coil.request.ImageRequest
 fun CoilImageView(
     modifier: Modifier = Modifier,
     imageUrl: String,
+    backgroundColor: Color = Color.LightGray,
+    contentScale: ContentScale = ContentScale.Crop,
+    alignment: Alignment = Alignment.Center,
 ) {
     val context = LocalContext.current
 
     AsyncImage(
         modifier = modifier
             .background(
-                color = Color.LightGray,
+                color = backgroundColor,
             ),
         model = ImageRequest.Builder(context)
             .data(imageUrl)
             .crossfade(true)
             .build(),
         contentDescription = null,
-        contentScale = ContentScale.Crop,
-        alignment = Alignment.Center,
+        contentScale = contentScale,
+        alignment = alignment,
     )
 }
