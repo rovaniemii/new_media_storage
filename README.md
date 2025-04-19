@@ -45,7 +45,7 @@
 
 ### Android
 - Minimum SDK level 24
-- MVVM pattern
+- MVVM pattern, UDF
 
 ### 디렉토리 트리
 ~~~nginx
@@ -70,7 +70,7 @@
    ├─ 📁 theme          # Material Theme 정의
    └─ 📁 util           # UI 관련 유틸 함수
 📦 feature
-└─ 📂 main
+└─ 📂 main              # 검색, 보관함
 ~~~
 
 </br>
