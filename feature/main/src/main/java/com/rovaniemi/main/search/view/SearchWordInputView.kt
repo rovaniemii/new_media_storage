@@ -29,19 +29,18 @@ import com.rovaniemi.ui.extension.rippleClickable
 @Composable
 internal fun SearchWordInputView(
     modifier: Modifier = Modifier,
-    initValue: String,
+    query: String,
     onQueryChange: (changedValue: String) -> Unit,
     onSearchButtonClick: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
-    val isShowButton by remember(initValue) { mutableStateOf(initValue.isNotEmpty()) }
 
     HYTextField(
         modifier = modifier
             .padding(
                 vertical = 12.dp,
             ),
-        initValue = initValue,
+        initValue = query,
         hint = stringResource(R.string.search_query_hint_message),
         onValueChange = onQueryChange,
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -56,7 +55,7 @@ internal fun SearchWordInputView(
         iconContent = {
             Spacer(modifier = Modifier.width(8.dp))
 
-            if (isShowButton) {
+            if (query.isNotEmpty()) {
                 Image(
                     modifier = Modifier
                         .clickable(
@@ -96,7 +95,7 @@ private fun PreviewSearchWordInputView() {
         var initValue by remember { mutableStateOf("") }
 
         SearchWordInputView(
-            initValue = initValue,
+            query = initValue,
             onQueryChange = {
                 initValue = it
             },

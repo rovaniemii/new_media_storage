@@ -50,7 +50,7 @@ internal fun SearchScreen(
                 .padding(
                     horizontal = 12.dp,
                 ),
-            initValue = searchQuery,
+            query = searchQuery,
             onQueryChange = onQueryChange,
             onSearchButtonClick = onSearchButtonClick,
         )
