@@ -32,6 +32,7 @@ internal fun SearchScreen(
     navigationHeight: Dp,
     noNeedToLoad: Boolean,
     searchQuery: String,
+    cellsCount: Int,
     items: LazyPagingItems<SearchViewData>,
     onQueryChange: (query: String) -> Unit,
     onSearchButtonClick: () -> Unit,
@@ -60,6 +61,7 @@ internal fun SearchScreen(
                 ItemsGridView(
                     navigationHeight = navigationHeight,
                     items = items,
+                    cellsCount = cellsCount,
                     onClickItem = onClickUpdateBookmark,
                 )
             }
@@ -112,6 +114,7 @@ private fun PreviewSearchScreen() {
         navigationHeight = 0.dp,
         noNeedToLoad = false,
         searchQuery = query,
+        cellsCount = 2,
         items = lazyItems,
         onQueryChange = { query = it },
         onSearchButtonClick = {},

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,6 +29,8 @@ import com.rovaniemi.main.search.SearchScreen
 import com.rovaniemi.main.storage.StorageScreen
 import com.rovaniemi.main.viewmodel.SearchViewModel
 import com.rovaniemi.main.viewmodel.StorageViewModel
+import com.rovaniemi.ui.extension.DevicePosture
+import com.rovaniemi.ui.extension.rememberDevicePosture
 import kotlinx.coroutines.launch
 
 @Composable
@@ -38,6 +41,7 @@ internal fun MainScreen(
     handleToastMessage: (message: String) -> Unit,
 ) {
     val density = LocalDensity.current
+    val devicePosture = rememberDevicePosture()
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -48,6 +52,11 @@ internal fun MainScreen(
     val noNeedToLoading by searchViewModel.noNeedToLoading.collectAsState(false)
 
     var navigationHeight by remember { mutableStateOf(0.dp) }
+    val gridCellsCount by remember(devicePosture) {
+        mutableIntStateOf(
+            if (devicePosture == DevicePosture.Normal) 2 else 4
+        )
+    }
 
     LaunchedEffect(Unit) {
         launch {
@@ -78,6 +87,8 @@ internal fun MainScreen(
                 }
             }
         }
+
+
     }
 
     Box(
@@ -99,6 +110,7 @@ internal fun MainScreen(
                     navigationHeight = navigationHeight,
                     noNeedToLoad = noNeedToLoading,
                     searchQuery = searchQuery,
+                    cellsCount = gridCellsCount,
                     items = searchPagingData,
                     onQueryChange = searchViewModel::updateSearchQuery,
                     onSearchButtonClick = searchViewModel::searchButtonClick,
@@ -111,6 +123,7 @@ internal fun MainScreen(
             ) {
                 StorageScreen(
                     navigationHeight = navigationHeight,
+                    cellsCount = gridCellsCount,
                     items = storagePagingData,
                     deleteItem = storageViewModel::deleteBookmark,
                 )

@@ -16,12 +16,14 @@ import kotlinx.coroutines.flow.flowOf
 internal fun StorageScreen(
     modifier: Modifier = Modifier,
     navigationHeight: Dp,
+    cellsCount: Int,
     items: LazyPagingItems<SearchViewData>,
     deleteItem: (itemId: Long) -> Unit,
 ) {
     ItemsGridView(
         modifier = modifier,
         navigationHeight = navigationHeight,
+        cellsCount = cellsCount,
         items = items,
         onClickItem = {
             deleteItem(it.id)
@@ -58,6 +60,7 @@ private fun PreviewStorageScreen() {
 
     StorageScreen(
         navigationHeight = 0.dp,
+        cellsCount = 2,
         items = lazyItems,
         deleteItem = {}
     )

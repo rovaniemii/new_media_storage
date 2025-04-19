@@ -19,6 +19,7 @@ import com.rovaniemi.ui.util.DisableOverScroll
 internal fun ItemsGridView(
     modifier: Modifier = Modifier,
     navigationHeight: Dp,
+    cellsCount: Int,
     items: LazyPagingItems<SearchViewData>,
     onClickItem: ((item: SearchViewData) -> Unit)? = null,
 ) {
@@ -32,7 +33,7 @@ internal fun ItemsGridView(
                 .padding(
                     horizontal = 4.dp,
                 ),
-            columns = GridCells.Fixed(2),
+            columns = GridCells.Fixed(cellsCount),
             contentPadding = PaddingValues(
                 bottom = navigationHeight,
             ),

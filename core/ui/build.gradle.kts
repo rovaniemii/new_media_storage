@@ -54,4 +54,7 @@ dependencies {
 
     // Lottie
     implementation(libs.bundles.lottie)
+
+    // Window
+    implementation(libs.androidx.window)
 }
