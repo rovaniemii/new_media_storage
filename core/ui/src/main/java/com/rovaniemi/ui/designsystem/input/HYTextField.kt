@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun InputView(
+fun HYTextField(
     modifier: Modifier = Modifier,
     initValue: String,
     hint: String,
@@ -119,7 +119,7 @@ private fun PreviewSearchWordInputView() {
     var initValue by remember { mutableStateOf("") }
 
     Surface {
-        InputView(
+        HYTextField(
             initValue = initValue,
             hint = "입력해주세요.",
             onValueChange = {

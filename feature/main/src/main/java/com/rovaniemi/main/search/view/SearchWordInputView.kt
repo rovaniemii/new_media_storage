@@ -23,7 +23,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rovaniemi.main.R
-import com.rovaniemi.ui.designsystem.input.InputView
+import com.rovaniemi.ui.designsystem.input.HYTextField
 import com.rovaniemi.ui.extension.rippleClickable
 
 @Composable
@@ -36,7 +36,7 @@ internal fun SearchWordInputView(
     val focusManager = LocalFocusManager.current
     val isShowButton by remember(initValue) { mutableStateOf(initValue.isNotEmpty()) }
 
-    InputView(
+    HYTextField(
         modifier = modifier
             .padding(
                 vertical = 12.dp,
