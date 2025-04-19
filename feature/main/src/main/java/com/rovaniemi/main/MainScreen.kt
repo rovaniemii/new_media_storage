@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.rovaniemi.main.compose.view.BottomNavigationBar
@@ -38,6 +39,7 @@ internal fun MainScreen(
 ) {
     val density = LocalDensity.current
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
 
     val searchPagingData = searchViewModel.searchPagingData.collectAsLazyPagingItems()
     val storagePagingData = storageViewModel.storagePagingData.collectAsLazyPagingItems()
@@ -121,7 +123,7 @@ internal fun MainScreen(
                 .onSizeChanged {
                     navigationHeight = with(density) { it.height.toDp() }
                 },
-            navController = navController,
+            navBackStackEntry = navBackStackEntry,
             onClick = { screenRoute ->
                 navController.navigate(screenRoute) {
                     launchSingleTop = true
