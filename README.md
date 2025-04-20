@@ -53,9 +53,7 @@
 │  ├─ 📁 paging         # Paging 관련 유틸
 │  ├─ 📁 repository     # Repository 구현체
 │  └─ 📁 room           # Room DAO 및 DB 설정
-├─ 📂 domain            # 도메인 레이어 모델 및 Repository 인터페이스 정의
-├─ 📂 model-dto         # API 응답 DTO 정의
-├─ 📂 model-entity      # 로컬 DB Entity 정의
+├─ 📂 model             # API 응답 DTO, 로컬 DB Entity 정의
 ├─ 📂 network
 │  ├─ 📁 constant       # API 베이스 URL 등 상수
 │  ├─ 📁 di             # 네트워크 DI 모듈
@@ -65,8 +63,11 @@
    ├─ 📁 extension      # Extension 함수
    ├─ 📁 theme          # Material Theme 정의
    └─ 📁 util           # UI 관련 유틸 함수
+📦 domain               
+├─ 📁 repository        # Repository 인터페이스
+└─ 📁 model             # domain 모델
 📦 feature
-└─ 📂 main              # 검색, 보관함
+└─ 📁 main              # 검색, 보관함
 ~~~
 
 </br>
