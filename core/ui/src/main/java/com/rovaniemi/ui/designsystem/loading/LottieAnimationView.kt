@@ -3,6 +3,7 @@ package com.rovaniemi.ui.designsystem.loading
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -31,4 +32,12 @@ fun LottieAnimationView(
             iterations = iterations
         )
     }
+}
+
+@Preview
+@Composable
+private fun PreviewLottieAnimationView() {
+    LottieAnimationView(
+        jsonString = "loading.json",
+    )
 }

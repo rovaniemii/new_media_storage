@@ -27,6 +27,7 @@ import com.rovaniemi.main.compose.view.BottomNavigationBar
 import com.rovaniemi.main.compose.viewdata.ScreenType
 import com.rovaniemi.main.search.SearchScreen
 import com.rovaniemi.main.storage.StorageScreen
+import com.rovaniemi.main.storage.view.DeleteDialogView
 import com.rovaniemi.main.viewmodel.SearchViewModel
 import com.rovaniemi.main.viewmodel.StorageViewModel
 import com.rovaniemi.ui.extension.DevicePosture
@@ -57,6 +58,7 @@ internal fun MainScreen(
             if (devicePosture == DevicePosture.Normal) 2 else 4
         )
     }
+    var showDeleteDialogIncludeId by remember { mutableStateOf<Long?>(null) }
 
     LaunchedEffect(Unit) {
         launch {
@@ -87,8 +89,6 @@ internal fun MainScreen(
                 }
             }
         }
-
-
     }
 
     Box(
@@ -125,7 +125,9 @@ internal fun MainScreen(
                     navigationHeight = navigationHeight,
                     cellsCount = gridCellsCount,
                     items = storagePagingData,
-                    deleteItem = storageViewModel::deleteBookmark,
+                    deleteItem = { id ->
+                        showDeleteDialogIncludeId = id
+                    },
                 )
             }
         }
@@ -146,5 +148,16 @@ internal fun MainScreen(
                 }
             }
         )
+
+        showDeleteDialogIncludeId?.let { id ->
+            DeleteDialogView(
+                onDismissRequest = {
+                    showDeleteDialogIncludeId = null
+                },
+                onClickYes = {
+                    storageViewModel.deleteBookmark(id)
+                }
+            )
+        }
     }
 }

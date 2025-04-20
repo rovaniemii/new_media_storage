@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
@@ -32,5 +33,13 @@ fun CoilImageView(
         contentDescription = null,
         contentScale = contentScale,
         alignment = alignment,
+    )
+}
+
+@Preview
+@Composable
+private fun PreviewCoilImageView() {
+    CoilImageView(
+        imageUrl = ""
     )
 }
