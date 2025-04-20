@@ -50,7 +50,7 @@
 ├─ 📂 data
 │  ├─ 📁 api            # API 응답 처리
 │  ├─ 📁 di             # DI(Hilt) 설정
-│  ├─ 📁 paging         # Paging 관련 유틸
+│  ├─ 📁 paging         # PagingSource
 │  ├─ 📁 repository     # Repository 구현체
 │  └─ 📁 room           # Room DAO 및 DB 설정
 ├─ 📂 model             # API 응답 DTO, 로컬 DB Entity 정의
