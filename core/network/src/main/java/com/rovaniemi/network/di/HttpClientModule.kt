@@ -11,11 +11,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object HttpClientModule {
+internal object HttpClientModule {
 
     @Singleton
     @Provides
-    fun provideKakaoClient(): OkHttpClient {
+    internal fun provideKakaoClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .apply {
                 retryOnConnectionFailure(true)

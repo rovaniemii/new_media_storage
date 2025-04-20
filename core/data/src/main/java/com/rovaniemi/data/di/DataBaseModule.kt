@@ -13,10 +13,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataBaseModule {
+internal object DataBaseModule {
     @Provides
     @Singleton
-    fun provideStorageDatabase(
+    internal fun provideStorageDatabase(
         @ApplicationContext context: Context,
     ): StorageDatabase {
         return Room.databaseBuilder(
@@ -28,7 +28,7 @@ object DataBaseModule {
 
     @Provides
     @Singleton
-    fun provideStorageDao(storageDatabase: StorageDatabase): StorageDao {
+    internal fun provideStorageDao(storageDatabase: StorageDatabase): StorageDao {
         return storageDatabase.storageDao()
     }
 }

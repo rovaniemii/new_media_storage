@@ -13,7 +13,7 @@ import com.rovaniemii.domain.repository.RoomRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class RoomRepositoryImpl @Inject constructor(
+internal class RoomRepositoryImpl @Inject constructor(
     private val dao: StorageDao,
     private val database: StorageDatabase,
 ) : RoomRepository {

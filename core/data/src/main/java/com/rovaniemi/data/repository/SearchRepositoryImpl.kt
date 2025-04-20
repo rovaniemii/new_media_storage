@@ -11,7 +11,7 @@ import com.rovaniemii.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class SearchRepositoryImpl @Inject constructor(
+internal class SearchRepositoryImpl @Inject constructor(
     private val kakaoAPIService: KakaoAPIService,
 ): SearchRepository {
     override fun getSearchPagingSource(query: String): Flow<PagingData<SearchItem>> {

@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.rovaniemi.model.entity.StorageEntity
 
 @Dao
-interface StorageDao {
+internal interface StorageDao {
 
     @Query("SELECT * FROM StorageEntity ORDER BY createdAt DESC LIMIT :limit OFFSET :offset")
     suspend fun getItemsPaged(

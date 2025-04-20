@@ -12,11 +12,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(
+    internal fun provideRetrofit(
         client: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()

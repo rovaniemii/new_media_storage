@@ -7,7 +7,7 @@ import com.rovaniemii.model_dto.response.ResponseDTO
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface KakaoAPIService {
+internal interface KakaoAPIService {
     @GET(KakaoConstant.KAKAO_IMAGE_URL)
     suspend fun searchImages(
         @Query("sort") sort: String = KakaoConstant.KAKAO_SORT_RECENCY,

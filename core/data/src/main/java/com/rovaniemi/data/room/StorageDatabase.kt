@@ -10,6 +10,6 @@ import com.rovaniemi.model.entity.StorageEntity
     version = 1,
     exportSchema = false,
 )
-abstract class StorageDatabase : RoomDatabase() {
-    abstract fun storageDao(): StorageDao
+internal abstract class StorageDatabase : RoomDatabase() {
+    internal abstract fun storageDao(): StorageDao
 }

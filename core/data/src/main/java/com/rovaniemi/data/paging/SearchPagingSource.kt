@@ -7,7 +7,7 @@ import com.rovaniemii.domain.model.SearchItem
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class SearchPagingSource(
+internal class SearchPagingSource(
     private val kakaoAPIService: KakaoAPIService,
     private val query: String,
 ) : PagingSource<Int, SearchItem>() {

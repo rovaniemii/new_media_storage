@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class StorageViewModel @Inject constructor(
+internal class StorageViewModel @Inject constructor(
     private val roomRepository: RoomRepository,
 ) : ViewModel() {
     sealed class BookmarkEvent {

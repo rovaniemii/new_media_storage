@@ -10,11 +10,11 @@ import retrofit2.Retrofit
 
 @Module
 @InstallIn(SingletonComponent::class)
-object APIServiceModule {
+internal object APIServiceModule {
 
     @Provides
     @Singleton
-    fun provideKakaoService(retrofit: Retrofit): KakaoAPIService {
+    internal fun provideKakaoService(retrofit: Retrofit): KakaoAPIService {
         return retrofit.create(KakaoAPIService::class.java)
     }
 }

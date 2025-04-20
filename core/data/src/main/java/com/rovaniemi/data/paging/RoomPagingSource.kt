@@ -6,7 +6,7 @@ import com.rovaniemi.data.room.dao.StorageDao
 import com.rovaniemii.domain.model.StorageItem
 import javax.inject.Inject
 
-class RoomPagingSource @Inject constructor(
+internal class RoomPagingSource @Inject constructor(
     private val dao: StorageDao,
 ) : PagingSource<Int, StorageItem>() {
 

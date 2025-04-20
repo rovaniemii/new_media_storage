@@ -15,17 +15,17 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+internal object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideSearchRepository(kakaoAPIService: KakaoAPIService): SearchRepository {
+    internal fun provideSearchRepository(kakaoAPIService: KakaoAPIService): SearchRepository {
         return SearchRepositoryImpl(kakaoAPIService)
     }
 
     @Provides
     @Singleton
-    fun provideRoomRepository(
+    internal fun provideRoomRepository(
         storageDao: StorageDao,
         storageDatabase: StorageDatabase,
     ): RoomRepository {

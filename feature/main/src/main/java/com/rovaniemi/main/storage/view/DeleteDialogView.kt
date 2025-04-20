@@ -22,7 +22,7 @@ import com.rovaniemi.ui.extension.DevicePosture
 import com.rovaniemi.ui.extension.rippleClickable
 
 @Composable
-fun DeleteDialogView(
+internal fun DeleteDialogView(
     modifier: Modifier = Modifier,
     devicePosture: DevicePosture,
     onDismissRequest: () -> Unit,
