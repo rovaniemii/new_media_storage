@@ -21,14 +21,13 @@ import com.rovaniemi.ui.extension.rememberDevicePosture
 @Composable
 fun HYDialogView(
     modifier: Modifier = Modifier,
+    devicePosture: DevicePosture,
     dismissOnBackPress: Boolean = true,
     dismissOnClickOutside: Boolean = true,
     backgroundColor: Color = Color.White,
     onDismissRequest: () -> Unit,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val devicePosture = rememberDevicePosture()
-
     Dialog(
         onDismissRequest = onDismissRequest,
         properties = DialogProperties(
@@ -64,6 +63,7 @@ fun HYDialogView(
 @Composable
 private fun PreviewHYDialogView() {
     HYDialogView(
+        devicePosture = rememberDevicePosture(),
         onDismissRequest = {},
         content = {
             Text(

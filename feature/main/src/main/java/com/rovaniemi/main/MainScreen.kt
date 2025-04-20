@@ -151,6 +151,7 @@ internal fun MainScreen(
 
         showDeleteDialogIncludeId?.let { id ->
             DeleteDialogView(
+                devicePosture = devicePosture,
                 onDismissRequest = {
                     showDeleteDialogIncludeId = null
                 },

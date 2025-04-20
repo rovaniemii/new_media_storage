@@ -18,16 +18,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rovaniemi.ui.designsystem.dialog.HYDialogView
+import com.rovaniemi.ui.extension.DevicePosture
 import com.rovaniemi.ui.extension.rippleClickable
 
 @Composable
 fun DeleteDialogView(
     modifier: Modifier = Modifier,
+    devicePosture: DevicePosture,
     onDismissRequest: () -> Unit,
     onClickYes: () -> Unit,
 ) {
     HYDialogView(
         modifier = modifier,
+        devicePosture = devicePosture,
         onDismissRequest = onDismissRequest,
     ) {
         Column {
@@ -100,6 +103,7 @@ fun DeleteDialogView(
 @Composable
 private fun PreviewDeleteDialogView(){
     DeleteDialogView(
+        devicePosture = DevicePosture.Normal,
         onDismissRequest = {},
         onClickYes = {},
     )
