@@ -1,4 +1,4 @@
-package com.rovaniemii.model_dto.dto
+package com.rovaniemii.model.dto
 
 import com.google.gson.annotations.SerializedName
 

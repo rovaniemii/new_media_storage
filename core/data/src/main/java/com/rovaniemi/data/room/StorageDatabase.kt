@@ -3,7 +3,7 @@ package com.rovaniemi.data.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.rovaniemi.data.room.dao.StorageDao
-import com.rovaniemi.model.entity.StorageEntity
+import com.rovaniemii.model.entity.StorageEntity
 
 @Database(
     entities = [StorageEntity::class],

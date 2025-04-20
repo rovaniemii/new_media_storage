@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rovaniemii.model_dto"
+    namespace = "com.rovaniemii.domain"
     compileSdk = 35
 
     defaultConfig {
@@ -36,6 +36,6 @@ dependencies {
     // Kotlin
     implementation(libs.bundles.kotlin)
 
-    // Util
-    implementation(libs.bundles.util)
+    // Paging3
+    implementation(libs.bundles.androidx.paging3)
 }

@@ -34,8 +34,8 @@ android {
 
 dependencies {
     implementation(project(":core:data"))
-    implementation(project(":core:domain"))
     implementation(project(":core:ui"))
+    implementation(project(":domain"))
 
     // Androidx Lifecycle
     implementation(libs.bundles.androidx.lifecycle)

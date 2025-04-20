@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import com.rovaniemi.data.paging.RoomPagingSource
 import com.rovaniemi.data.room.StorageDatabase
 import com.rovaniemi.data.room.dao.StorageDao
-import com.rovaniemi.model.entity.StorageEntity
+import com.rovaniemii.model.entity.StorageEntity
 import com.rovaniemi.network.constant.KakaoConstant
 import com.rovaniemii.domain.model.StorageItem
 import com.rovaniemii.domain.repository.RoomRepository

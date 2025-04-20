@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model-dto"))
+    implementation(project(":core:model"))
 
     // Kotlin
     implementation(libs.bundles.kotlin)

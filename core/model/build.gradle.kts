@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rovaniemi.model"
+    namespace = "com.rovaniemii.model"
     compileSdk = 35
 
     defaultConfig {
@@ -18,7 +18,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {

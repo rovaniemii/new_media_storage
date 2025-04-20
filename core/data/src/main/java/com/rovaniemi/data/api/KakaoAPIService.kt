@@ -1,8 +1,8 @@
 package com.rovaniemi.data.api
 
 import com.rovaniemi.network.constant.KakaoConstant
-import com.rovaniemii.model_dto.dto.KakaoDTO
-import com.rovaniemii.model_dto.response.ResponseDTO
+import com.rovaniemii.model.dto.KakaoDTO
+import com.rovaniemii.model.response.ResponseDTO
 
 import retrofit2.http.GET
 import retrofit2.http.Query
