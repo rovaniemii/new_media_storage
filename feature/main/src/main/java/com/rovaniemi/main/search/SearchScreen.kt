@@ -57,15 +57,6 @@ internal fun SearchScreen(
         )
 
         when (val loadState = items.loadState.refresh) {
-            is LoadState.NotLoading -> {
-                ItemsGridView(
-                    navigationHeight = navigationHeight,
-                    items = items,
-                    cellsCount = cellsCount,
-                    onClickItem = onClickUpdateBookmark,
-                )
-            }
-
             is LoadState.Loading -> {
                 if (noNeedToLoad) {
                     SearchLoadingView()
@@ -75,6 +66,15 @@ internal fun SearchScreen(
             is LoadState.Error -> {
                 SearchErrorView(
                     loadState = loadState,
+                )
+            }
+
+            is LoadState.NotLoading -> {
+                ItemsGridView(
+                    navigationHeight = navigationHeight,
+                    items = items,
+                    cellsCount = cellsCount,
+                    onClickItem = onClickUpdateBookmark,
                 )
             }
         }

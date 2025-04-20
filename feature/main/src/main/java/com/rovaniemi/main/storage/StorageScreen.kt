@@ -10,6 +10,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.rovaniemi.main.compose.view.ItemsGridView
 import com.rovaniemi.main.compose.viewdata.SearchViewData
+import com.rovaniemi.main.storage.view.StorageEmptyView
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -20,15 +21,19 @@ internal fun StorageScreen(
     items: LazyPagingItems<SearchViewData>,
     deleteItem: (itemId: Long) -> Unit,
 ) {
-    ItemsGridView(
-        modifier = modifier,
-        navigationHeight = navigationHeight,
-        cellsCount = cellsCount,
-        items = items,
-        onClickItem = {
-            deleteItem(it.id)
-        }
-    )
+    if (items.itemCount == 0) {
+        StorageEmptyView()
+    } else {
+        ItemsGridView(
+            modifier = modifier,
+            navigationHeight = navigationHeight,
+            cellsCount = cellsCount,
+            items = items,
+            onClickItem = {
+                deleteItem(it.id)
+            }
+        )
+    }
 }
 
 @Preview

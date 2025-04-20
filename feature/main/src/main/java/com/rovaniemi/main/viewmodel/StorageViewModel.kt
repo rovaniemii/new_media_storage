@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.rovaniemi.data.repository.RoomRepositoryImpl
 import com.rovaniemi.main.compose.viewdata.SearchViewData
 import com.rovaniemii.domain.model.StorageItem
+import com.rovaniemii.domain.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StorageViewModel @Inject constructor(
-    private val roomRepositoryImpl: RoomRepositoryImpl,
+    private val roomRepository: RoomRepository,
 ) : ViewModel() {
     sealed class BookmarkEvent {
         data object DeleteSuccess : BookmarkEvent()
@@ -50,11 +50,17 @@ class StorageViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _refreshTrigger.emit(Unit)
+            _refreshTrigger.collect {
+                requestStorage()
+            }
         }
 
+        requestStorage()
+    }
+
+    private fun requestStorage() {
         viewModelScope.launch {
-            roomRepositoryImpl
+            roomRepository
                 .getItemsPaged()
                 .cachedIn(viewModelScope)
                 .collect { pagingData ->
@@ -66,7 +72,7 @@ class StorageViewModel @Inject constructor(
     fun deleteBookmark(id: Long) {
         viewModelScope.launch {
             try {
-                roomRepositoryImpl.deleteBookmark(id)
+                roomRepository.deleteBookmark(id)
                 _bookmarkEventFlow.emit(BookmarkEvent.DeleteSuccess)
             } catch (e: Exception) {
                 _bookmarkEventFlow.emit(BookmarkEvent.DeleteFail("삭제에 실패했습니다."))
@@ -75,6 +81,8 @@ class StorageViewModel @Inject constructor(
     }
 
     fun refreshStorage() {
-        _refreshTrigger.tryEmit(Unit)
+        viewModelScope.launch {
+            _refreshTrigger.tryEmit(Unit)
+        }
     }
 }

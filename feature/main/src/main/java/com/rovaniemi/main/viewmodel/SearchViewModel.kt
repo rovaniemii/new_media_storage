@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.rovaniemi.data.repository.RoomRepositoryImpl
-import com.rovaniemi.data.repository.SearchRepositoryImpl
 import com.rovaniemi.main.compose.viewdata.SearchViewData
 import com.rovaniemii.domain.model.SearchItem
 import com.rovaniemii.domain.model.StorageItem
+import com.rovaniemii.domain.repository.RoomRepository
+import com.rovaniemii.domain.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,8 +25,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchRepositoryImpl: SearchRepositoryImpl,
-    private val roomRepositoryImpl: RoomRepositoryImpl,
+    private val searchRepository: SearchRepository,
+    private val roomRepository: RoomRepository,
 ) : ViewModel() {
     sealed class BookmarkEvent {
         data object Success : BookmarkEvent()
@@ -68,7 +68,7 @@ class SearchViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _storageItemsGetAll.value = roomRepositoryImpl.getAll()
+            _storageItemsGetAll.value = roomRepository.getAll()
         }
     }
 
@@ -86,7 +86,7 @@ class SearchViewModel @Inject constructor(
         _cachedQuery.value = query
 
         viewModelScope.launch {
-            searchRepositoryImpl
+            searchRepository
                 .getSearchPagingSource(query)
                 .cachedIn(viewModelScope)
                 .collectLatest { pagingData ->
@@ -97,7 +97,7 @@ class SearchViewModel @Inject constructor(
 
     fun refreshStorage() {
         viewModelScope.launch {
-            _storageItemsGetAll.value = roomRepositoryImpl.getAll()
+            _storageItemsGetAll.value = roomRepository.getAll()
         }
     }
 
@@ -105,9 +105,9 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 if (item.isBookmark) {
-                    roomRepositoryImpl.deleteBookmark(item.id)
+                    roomRepository.deleteBookmark(item.id)
                 } else {
-                    roomRepositoryImpl.insertBookmark(
+                    roomRepository.insertBookmark(
                         StorageItem(
                             id = item.id,
                             thumbnail = item.thumbnail,
