@@ -27,10 +27,10 @@
 </br>
 
 ## 프로젝트 구조
-멀티 모듈 + Clean Architecture 기반으로 기능 단위와 역할 단위로 모듈을 분리하여 유지보수성과 테스트 용이성을 높였습니다.
+멀티 모듈 + Clean Architecture 기반으로 기능 단위와 역할 단위로 모듈을 분리하여 유지보수성을 높였습니다.
 - **Architecture**: MVVM + Clean Architecture + 멀티 모듈 구성
 - **UI Framework**: Jetpack Compose  
-  - 상태 관리: `remember`, `mutableStateOf`, `collectAsState`, `stateIn`, `asStateFlow`, `LaunchedEffect`
+  - 상태 관리: `remember`, `mutableStateOf`, `collectAsState`, `LaunchedEffect`
   - 동적 UI: `LazyPagingItems`, `LoadState` 대응
   - **디바이스 대응**: FoldingFeature, WindowLayoutInfo, screenWidthDp, 모델명 기반으로 폴더블/태블릿 UI 최적화
 - **비동기 처리**: Kotlin Flow + Coroutine
