@@ -143,8 +143,10 @@ internal fun MainScreen(
             navBackStackEntry = navBackStackEntry,
             onClick = { screenRoute ->
                 navController.navigate(screenRoute) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = false
+                    }
                     launchSingleTop = true
-                    restoreState = true
                 }
             }
         )
