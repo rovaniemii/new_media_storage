@@ -32,7 +32,7 @@
 - **UI Framework**: Jetpack Compose  
   - 상태 관리: `remember`, `mutableStateOf`, `collectAsState`, `LaunchedEffect`
   - 동적 UI: `LazyPagingItems`, `LoadState` 대응
-  - **디바이스 대응**: FoldingFeature, WindowLayoutInfo, screenWidthDp, 모델명 기반으로 폴더블/태블릿 UI 최적화
+  - **디바이스 대응**: FoldingFeature, screenWidthDp, 모델명 기반(SM-F7)으로 폴더블/태블릿 UI 최적화
 - **비동기 처리**: Kotlin Flow + Coroutine
 - **DI (Dependency Injection)**: Hilt
 - **Networking**: Retrofit + Gson
